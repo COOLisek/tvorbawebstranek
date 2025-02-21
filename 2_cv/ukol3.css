@@ -1,0 +1,20 @@
+/* Napište CSS kód, který vizualizuje HTML kód tak, že obsah elementu span bude zobrazen šedou barvou, odkazy 
+modrou barvou a při najetí myši se změní na tmavě modrou. Pokud je odkaz použit uvnitř elementu span, převezme j
+eho barvu (v našem případě tedy bude vizualizován šedou barvou, změna barvy po najetí myši zůstává stejná jako u odkazů mimo element span).
+
+Pozor HTML kód obsahuje chyby, které je nejprve třeba odstranit. K jejich nalezení použijte validátor. */
+
+span, span a{
+    color: grey;
+}
+
+a{
+    color:#6262ff;
+}
+
+a:hover{
+    color:#0000be;
+}
+
+
+
