@@ -1,0 +1,10 @@
+.text-box{
+    color: blue;
+    border: 0.15em dotted blue;
+    display: block;
+    padding: 1em ;
+}
+
+p{
+    line-height: 3em;
+}

@@ -1,0 +1,19 @@
+.ramecek{
+    width: 20em;
+    margin: auto;
+    border: solid lightblue;
+    border-left: 0.75em solid lightblue;
+    padding: 1em;
+}
+
+.ramecek hgroup p{
+    color: gray;
+    margin-top: 0;
+    
+}
+
+.ramecek hgroup h2{
+    color:black;
+    margin-bottom:0;
+}
+
