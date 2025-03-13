@@ -1,0 +1,60 @@
+:root {
+  --primary-color: yellow;
+  --secondary-color: green;
+  --danger-color: red;
+  --border-color: darkgreen;
+  --primary-background: lightgreen;
+  --secondary-background: lightblue;
+  --text-color: #303030;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+div {
+  width: 60ch;
+  margin: 1em auto;
+  color: var(--text-color);
+}
+
+.card {
+  padding: 1em;
+  border-radius: 5px;
+}
+
+.border-primary {
+  border: 1px solid var(--border-color);
+}
+
+.border-black {
+  border: 1px solid black;
+}
+
+.bg-primary {
+  background-color: var(--primary-background);
+}
+
+.bg-secondary {
+  background-color: var(--secondary-background);
+}
+
+.bg-danger {
+  background-color: var(--danger-color);
+}
+
+.bg-highlight {
+  background-color: var(--primary-color);
+}
+
+.link-secondary {
+  color: var(--secondary-color);
+}
+
+a:hover {
+  color: black;
+}
+
+a{
+  padding: 0 0.2em;
+}

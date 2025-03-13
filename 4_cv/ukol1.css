@@ -1,0 +1,45 @@
+:root{
+    --primary-color:mediumvioletred;
+}
+
+*{
+    margin: 0;
+    padding:0;
+
+}
+
+.bg-primary{
+    background-color: var(--primary-color);
+}
+
+.bg-white{
+    background-color: white;
+}
+
+.text-primary{
+    color:var(--primary-color);
+}
+
+.text-white{
+    color:white;
+}
+
+.border-primary{
+    border: 1px solid var(--primary-color);
+}
+
+.box-card{
+    margin: 1em auto;
+    padding: 1em;
+    width: 90vw;
+}
+
+.box__h2{
+    width: fit-content;
+    margin-bottom:1em;  
+}
+
+.box__h2--padding{
+    padding: 0.5em;
+}
+

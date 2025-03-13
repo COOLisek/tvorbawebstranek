@@ -1,0 +1,18 @@
+.footer{
+    width:100vw;
+    background-color: #016BAB;
+    padding: 0 5vw;
+    position:fixed;
+    bottom:0;
+    left:0;
+}
+
+.footer button{
+    color:black;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    height: 3em;
+    width: 30vw;
+    
+}
