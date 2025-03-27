@@ -1,0 +1,18 @@
+.menu{
+    display:flex;
+    width: 75em;
+    margin: 0 auto;
+}
+
+.menu__item{
+    flex-grow: 1;
+    border:1px solid black;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.menu__item--large{
+    flex-grow:2;
+}

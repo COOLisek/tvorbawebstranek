@@ -1,0 +1,40 @@
+.card{
+    display: flex;
+    margin:1em auto;
+    border:1px solid #0066cc;
+    width: 60ch;
+    padding: 1em;
+    
+}
+
+
+
+.card__image{
+    width: 100px;
+    height: 100px;
+    padding: 0 1em;
+}
+
+.card__image--right{
+    order: 3;
+}
+
+.card__texts{
+    display: flex;
+    flex-direction: column;
+    margin:0;
+}
+
+.card__title {
+    margin: 0;
+    padding-bottom: 1em;
+}
+/* nevím jak stylovat pomocí bem to h2 jestli mi poradíte prosím */
+.card__title > h2 {
+    margin: 0;
+    font-size: 1.2em; 
+}
+
+
+
+
