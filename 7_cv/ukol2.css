@@ -1,0 +1,46 @@
+.container{
+    display: flex;
+    width: 100vw;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.box{
+    background-color: #b5d7e4;
+    padding: 8em;
+    margin:1em;
+    border-radius: 10px;
+    flex:1;
+}
+
+
+
+
+/* extra velké zařízení */
+@media screen and (min-width: 1200px) {}
+
+
+
+/* velké zařízení */
+@media screen and (max-width: 1199px) and (min-width: 960px) {}
+
+
+
+/* středně velké zařízení */
+@media screen and (max-width: 959px) and (min-width: 560px) {
+    .container{
+        flex-direction: column;
+    }
+}
+
+
+/* malé zařízení */
+@media screen and (max-width: 559px) and (min-width: 360px) {
+    .container{
+        flex-direction: column;
+    }
+}
+
+
+
+

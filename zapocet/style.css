@@ -1,0 +1,44 @@
+:root {
+
+    --color-primary: #ff9301;
+    --color-heading: #0b0b15;
+    --color-text: #555555;
+    --color-form-border: #bbbbbb;
+    --color-separator: #eeeeee;
+    --color-bg: #f7f7ff;
+
+    --font-family: 'Roboto', sans-serif;
+}
+
+
+
+
+
+.card__image--primary{
+    background-color: var(--color-primary);
+    border-radius: 50%;
+}
+
+.card__title--primary{
+    font-weight: 900;
+}
+
+
+
+
+/* extra velké zařízení */
+@media screen and (min-width: 1200px) {}
+
+
+
+/* velké zařízení */
+@media screen and (max-width: 1199px) and (min-width: 960px) {}
+
+
+
+/* středně velké zařízení */
+@media screen and (max-width: 959px) and (min-width: 560px) {}
+
+
+/* malé zařízení */
+@media screen and (max-width: 559px) and (min-width: 360px) {}
