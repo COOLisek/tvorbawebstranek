@@ -6,291 +6,341 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>4 úkol</title>
-  <style>
-    /* Toto jen aby imgázky nebyly imgovské */
-    img {
-      width: 100px;
-    }
-  </style>
 </head>
 
 <body>
+
+
+
   <header class="header">
-    <div class="header__info">
-      <span class="header__pretitle">Hello, My name is</span>
-      <h1 class="header__title--primary">Jane Doe</h1>
-      <span class="header__title--secondary">Full-Stack Developer</span>
+    <div class="header__content">
+      <div class="header__info">
+        <span class="header__pretitle">Hello, My name is</span>
+        <h1 class="header__title header__title--primary">Jane Doe</h1>
+        <span class="header__title header__title--secondary">Full-Stack Developer</span>
+        <p class="header__text">
+          I design and develop services for customers of all sizes, specializing
+          in creating stylish, modern websites, web services and online stores
+        </p>
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item"><a href="#biography" class="nav__link">Biography</a></li>
+            <li class="nav__item"><a href="#services" class="nav__link">What I Do?</a></li>
+            <li class="nav__item"><a href="#awards" class="nav__link">Awards</a></li>
+            <li class="nav__item"><a href="#experience" class="nav__link">Experience</a></li>
+            <li class="nav__item"><a href="#portfolio" class="nav__link">My Portfolio</a></li>
+            <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="header__image">
+        <img src="img/avatar.svg" alt="Portrait of Jane Doe" class="header__img">
+      </div>
     </div>
-    <p class="header__text">
-      I design and develop services for customers of all sizes, specializing
-      in creating stylish, modern websites, web services and online stores
-    </p>
-    <nav class="nav">
-      <ul class="nav__list">
-        <li class="nav__item">
-          <a href="#biography" class="nav__link">Biography</a>
-        </li>
-        <li class="nav__item">
-          <a href="#services" class="nav__link">What I Do?</a>
-        </li>
-        <li class="nav__item">
-          <a href="#awards" class="nav__link">Awards</a>
-        </li>
-        <li class="nav__item">
-          <a href="#experience" class="nav__link">Experience</a>
-        </li>
-        <li class="nav__item">
-          <a href="#portfolio" class="nav__link">My portfolio</a>
-        </li>
-        <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
-      </ul>
-    </nav>
   </header>
+
 
   <main>
 
-    <section class="container container--primary" id="biography">
-      <figure class="card card--hero">
-        <img src="img/avatar.svg" alt="Portrait of Jane Doe" class="card__image--primary">
-        <figcaption class="card__caption">
-          <span class="card__title--primary">Jane Doe</span>
-          <span class="card__title--secondary">Full-Stack Developer</span>
-        </figcaption>
-      </figure>
+    <div class="bg--primary section--spaced">
+      <section class="container" id="biography">
+        <div class="container--primary">
+          <div class="container__figure">
+            <figure class="card card--hero">
+              <img src="img/avatar.svg" alt="Portrait of Jane Doe" class="card__image--primary">
+              <figcaption class="card__caption">
+                <span class="card__title--primary">Jane Doe</span>
+                <span class="card__title--secondary">Full-Stack Developer</span>
+              </figcaption>
+            </figure>
+          </div>
 
-      <h2 class="container__heading">Biography</h2>
-      <div class="container__text">
-        <p class="container__paragraph">
-          I'm a Freelancer Front-end Developer with over 3 years of
-          experience. I'm from San Francisco. I code and create web elements
-          for amazing people around the world. I like work with new people.
-          New people, new experiences.
-        </p>
-        <p class="container__paragraph">
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-        <p class="container__paragraph">
-          Consectetur adipisicing elit, lorem ipsum dolor sit amet, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor.
-        </p>
-      </div>
-    </section>
-
-    <img src="img/border-dark.png" alt="separator" class="separator">
-
-    <section class="container container--secondary" id="services">
-      <h2 class="container__heading">What I do?</h2>
-      <div class="card card--service">
-        <img src="img/pencil-alt-solid.svg" alt="Pencil" class="card__icon">
-        <h3 class="card__title">Web Design</h3>
-        <p class="card__text">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis
-          deleniti exercitationem rerum excepturi enim perspiciatis, suscipit
-          obcaecati, consectetur id saepe doloribus eveniet aliquam aperiam
-          dolores atque nisi a, dignissimos eum.
-        </p>
-      </div>
-
-      <div class="card card--service">
-        <img src="img/desktop-solid.svg" alt="Desktop" class="card__icon">
-        <h3 class="card__title">Web Development</h3>
-        <p class="card__text">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis
-          deleniti exercitationem rerum excepturi enim perspiciatis, suscipit
-          obcaecati, consectetur id saepe doloribus eveniet aliquam aperiam
-          dolores atque nisi a, dignissimos eum.
-        </p>
-      </div>
-
-      <div class="card card--service">
-        <img src="img/bullseye-solid.svg" alt="Bullseye" class="card__icon">
-        <h3 class="card__title">Seo Marketing</h3>
-        <p class="card__text">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis
-          deleniti exercitationem rerum excepturi enim perspiciatis, suscipit
-          obcaecati, consectetur id saepe doloribus eveniet aliquam aperiam
-          dolores atque nisi a, dignissimos eum.
-        </p>
-      </div>
-    </section>
-
-    <section class="container container--tertiary" id="awards">
-      <h2 class="container__heading">Awards</h2>
-      <div class="card card--award">
-        <img src="img/trophy-solid.svg" alt="Trophy" class="card__icon">
-        <span class="card__title">Creative Designer</span>
-      </div>
-      <div class="card card--award">
-        <img src="img/trophy-solid.svg" alt="Trophy" class="card__icon">
-        <span class="card__title">Yearly Best Performer</span>
-      </div>
-      <div class="card card--award">
-        <img src="img/trophy-solid.svg" alt="Trophy" class="card__icon">
-        <span class="card__title">Best Learner Award</span>
-      </div>
-    </section>
-
-    <section class="container container--list" id="experience">
-      <h2 class="container__heading">Experience</h2>
-      <article class="card card--experience">
-        <div class="card__period">
-          <time class="card__time" datetime="2021-02">Feb 2021</time> -
-          <span class="card__time">Present</span>
+          <div class="container__biography">
+            <h2 class="container__heading">Biography</h2>
+            <div class="container__text">
+              <p class="container__paragraph">
+                I'm a Freelancer Front-end Developer with over 3 years of
+                experience. I'm from San Francisco. I code and create web elements
+                for amazing people around the world. I like work with new people.
+                New people, new experiences.
+              </p>
+              <p class="container__paragraph">
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+              <p class="container__paragraph">
+                Consectetur adipisicing elit, lorem ipsum dolor sit amet, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="card__tag">Full Time</div>
-        <h3 class="card__title">Google LLC - Sr. Front-end Engineer</h3>
-        <p class="card__text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident
-          eum distinctio ex facilis magnam. Placeat dolores veritatis sint aut
-          repudiandae culpa beatae. Excepturi porro nemo, corrupti iure dolor
-          rerum nobis.
-        </p>
-      </article>
+      </section>
 
-      <article class="card card--experience">
-        <div class="card__period">
-          <time class="card__time" datetime="2020-03">Mar 2020</time> -
-          <span class="card__time">Present</span>
-        </div>
-        <div class="card__tag">Part Time</div>
-        <h3 class="card__title">Radian IT - Visual Designer</h3>
-        <p class="card__text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident
-          eum distinctio ex facilis magnam. Placeat dolores veritatis sint aut
-          repudiandae culpa beatae. Excepturi porro nemo, corrupti iure dolor
-          rerum nobis.
-        </p>
-      </article>
 
-      <article class="card card--experience">
-        <div class="card__period">
-          <time class="card__time" datetime="2019-01">Jan 2019</time> -
-          <span class="card__time">Present</span>
-        </div>
-        <div class="card__tag">Full Time</div>
-        <h3 class="card__title">IB Themes - Animation Artist</h3>
-        <p class="card__text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident
-          eum distinctio ex facilis magnam. Placeat dolores veritatis sint aut
-          repudiandae culpa beatae. Excepturi porro nemo, corrupti iure dolor
-          rerum nobis.
-        </p>
-      </article>
-    </section>
+      <div class="separator"></div>
 
-    <section class="container container--grid" id="portfolio">
-      <h2 class="container__heading">My portfolio</h2>
-      <article class="card card--portfolio">
-        <img src="img/640x360.png" alt="Placeholder" class="card__image">
-        <h4 class="card__title">Lorem ipsum</h4>
-        <time class="card__date" datetime="2305-07-13">07/13/2305</time>
-        <p class="card__text">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
-          perferendis exercitationem expedita cupiditate corporis debitis
-          ratione maxime itaque at quae.
-        </p>
-      </article>
-      <article class="card card--portfolio">
-        <img src="img/640x360.png" alt="Placeholder" class="card__image">
-        <h4 class="card__title">Lorem ipsum</h4>
-        <time class="card__date" datetime="2305-07-13">07/13/2305</time>
-        <p class="card__text">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
-          perferendis exercitationem expedita cupiditate corporis debitis
-          ratione maxime itaque at quae.
-        </p>
-      </article>
-      <article class="card card--portfolio">
-        <img src="img/640x360.png" alt="Placeholder" class="card__image">
-        <h4 class="card__title">Lorem ipsum</h4>
-        <time class="card__date" datetime="2305-07-13">07/13/2305</time>
-        <p class="card__text">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
-          perferendis exercitationem expedita cupiditate corporis debitis
-          ratione maxime itaque at quae.
-        </p>
-      </article>
-      <article class="card card--portfolio">
-        <img src="img/640x360.png" alt="Placeholder" class="card__image">
-        <h4 class="card__title">Lorem ipsum</h4>
-        <time class="card__date" datetime="2305-07-13">07/13/2305</time>
-        <p class="card__text">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
-          perferendis exercitationem expedita cupiditate corporis debitis
-          ratione maxime itaque at quae.
-        </p>
-      </article>
-      <article class="card card--portfolio">
-        <img src="img/640x360.png" alt="Placeholder" class="card__image">
-        <h4 class="card__title">Lorem ipsum</h4>
-        <time class="card__date" datetime="2305-07-13">07/13/2305</time>
-        <p class="card__text">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
-          perferendis exercitationem expedita cupiditate corporis debitis
-          ratione maxime itaque at quae.
-        </p>
-      </article>
-      <article class="card card--portfolio">
-        <img src="img/640x360.png" alt="Placeholder" class="card__image">
-        <h4 class="card__title">Lorem ipsum</h4>
-        <time class="card__date" datetime="2305-07-13">07/13/2305</time>
-        <p class="card__text">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
-          perferendis exercitationem expedita cupiditate corporis debitis
-          ratione maxime itaque at quae.
-        </p>
-      </article>
-    </section>
+      <section class="container " id="services">
+        <h2 class="container__heading">What I do?</h2>
+        <div class="container--secondary">
+          <div class="card card--service">
+            <img src="img/pencil-alt-solid.svg" alt="Pencil" class="card__icon">
+            <h3 class="card__title">Web Design</h3>
+            <p class="card__text">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis
+              deleniti exercitationem rerum excepturi enim perspiciatis, suscipit
+              obcaecati, consectetur id saepe doloribus eveniet aliquam aperiam
+              dolores atque nisi a, dignissimos eum.
+            </p>
+          </div>
 
-    <section class="container container--contact" id="contact">
-      <h2 class="container__heading">Contact</h2>
-      <h3 class="container__subheading">What's your story? Get in touch</h3>
-      <p class="container__text">
-        Always available for freelancing if the right project comes along,
-        feel free to contact me.
-      </p>
-      <address class="info">
-        <div class="info__item">
-          <img src="img/map-marker-alt-solid.svg" alt="Map marker icon" class="info__icon">
-          <p class="info__text">
-            Champ de Mars, 5 Av. Anatole France, 75007 Paris, Francie
-          </p>
-        </div>
-        <div class="info__item">
-          <img src="img/envelope-regular.svg" alt="Envelope icon" class="info__icon">
-          <p class="info__text">
-            <a href="mailto:support@domain.com">support@domain.com</a>
-          </p>
-        </div>
-        <div class="info__item">
-          <img src="img/mobile-alt-solid.svg" alt="Mobile icon" class="info__icon">
-          <p class="info__text">
-            <a href="tel:555-2368">555-2368</a>
-          </p>
-        </div>
-      </address>
+          <div class="card card--service">
+            <img src="img/desktop-solid.svg" alt="Desktop" class="card__icon">
+            <h3 class="card__title">Web Development</h3>
+            <p class="card__text">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis
+              deleniti exercitationem rerum excepturi enim perspiciatis, suscipit
+              obcaecati, consectetur id saepe doloribus eveniet aliquam aperiam
+              dolores atque nisi a, dignissimos eum.
+            </p>
+          </div>
 
-      <form class="form form--contact">
-        <h4 class="form__subheading">Say Something</h4>
-        <div class="form__group">
-          <input type="text" name="full_name" placeholder="Full name" class="form__input">
-          <input type="email" name="email" placeholder="Email address" class="form__input">
-          <input type="text" name="subject" placeholder="Subject" class="form__input">
-          <textarea name="comment" placeholder="Type comment" class="form__textarea"></textarea>
-          <button class="form__button">Send Message</button>
+          <div class="card card--service">
+            <img src="img/bullseye-solid.svg" alt="Bullseye" class="card__icon">
+            <h3 class="card__title">Seo Marketing</h3>
+            <p class="card__text">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis
+              deleniti exercitationem rerum excepturi enim perspiciatis, suscipit
+              obcaecati, consectetur id saepe doloribus eveniet aliquam aperiam
+              dolores atque nisi a, dignissimos eum.
+            </p>
+          </div>
         </div>
-      </form>
+      </section>
+
+      <section class="container" id="awards">
+        <h2 class="container__heading">Awards</h2>
+        <div class="container--tertiary">
+          <div class="card card--award">
+            <img src="img/trophy-solid.svg" alt="Trophy" class="card__icon">
+            <span class="card__title--tertiary">Creative Designer</span>
+          </div>
+          <div class="card card--award">
+            <img src="img/trophy-solid.svg" alt="Trophy" class="card__icon">
+            <span class="card__title--tertiary">Yearly Best Performer</span>
+          </div>
+          <div class="card card--award">
+            <img src="img/trophy-solid.svg" alt="Trophy" class="card__icon">
+            <span class="card__title--tertiary">Best Learner Award</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <div class="bg--secondary section--spaced">
+      <section class="container" id="experience">
+        <h2 class="container__heading">Experience</h2>
+        <div class="container--list">
+          <article class="card card--experience">
+            <div class="card__side card__side--left">
+              <div class="card__period">
+                <time class="card__time" datetime="2021-02">Feb 2021</time> -
+                <time datetime="2025" class="card__time">Present</time>
+              </div>
+              <div class="card__tag">Full Time</div>
+            </div>
+            <div class="card__side card__side--right">
+              <h3 class="card__title">Google LLC - Sr. Front-end Engineer</h3>
+              <p class="card__text">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident
+                eum distinctio ex facilis magnam. Placeat dolores veritatis sint aut
+                repudiandae culpa beatae. Excepturi porro nemo, corrupti iure dolor
+                rerum nobis.
+              </p>
+            </div>
+          </article>
+
+          <article class="card card--experience">
+            <div class="card__side card__side--left">
+              <div class="card__period">
+                <time class="card__time" datetime="2020-03">Mar 2020</time> -
+                <time datetime="2025" class="card__time">Present</time>
+              </div>
+              <div class="card__tag card__tag--part_time">Part Time</div>
+            </div>
+            <div class="card__side card__side--right">
+              <h3 class="card__title">Radian IT - Visual Designer</h3>
+              <p class="card__text">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident
+                eum distinctio ex facilis magnam. Placeat dolores veritatis sint aut
+                repudiandae culpa beatae. Excepturi porro nemo, corrupti iure dolor
+                rerum nobis.
+              </p>
+            </div>
+          </article>
+
+          <article class="card card--experience">
+            <div class="card__side card__side--left">
+              <div class="card__period">
+                <time class="card__time" datetime="2019-01">Jan 2019</time> -
+                <time datetime="2025" class="card__time">Present</time>
+              </div>
+              <div class="card__tag">Full Time</div>
+            </div>
+            <div class="card__side card__side--right">
+              <h3 class="card__title">IB Themes - Animation Artist</h3>
+              <p class="card__text">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident
+                eum distinctio ex facilis magnam. Placeat dolores veritatis sint aut
+                repudiandae culpa beatae. Excepturi porro nemo, corrupti iure dolor
+                rerum nobis.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="container " id="portfolio">
+        <h2 class="container__heading">My portfolio</h2>
+        <div class="container--grid">
+          <article class="card card--portfolio">
+            <img src="img/640x360.png" alt="Placeholder" class="card__image ">
+            <h3 class="card__title card__title--portfolio">Lorem ipsum</h3>
+            <time class="card__date " datetime="2305-07-13">07/13/2305</time>
+            <p class="card__text card__text--portfolio">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
+              perferendis exercitationem expedita cupiditate corporis debitis
+              ratione maxime itaque at quae.
+            </p>
+          </article>
+          <article class="card card--portfolio">
+            <img src="img/640x360.png" alt="Placeholder" class="card__image ">
+            <h3 class="card__title card__title--portfolio">Lorem ipsum</h3>
+            <time class="card__date " datetime="2305-07-13">07/13/2305</time>
+            <p class="card__text card__text--portfolio">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
+              perferendis exercitationem expedita cupiditate corporis debitis
+              ratione maxime itaque at quae.
+            </p>
+          </article>
+          <article class="card card--portfolio">
+            <img src="img/640x360.png" alt="Placeholder" class="card__image ">
+            <h3 class="card__title card__title--portfolio">Lorem ipsum</h3>
+            <time class="card__date " datetime="2305-07-13">07/13/2305</time>
+            <p class="card__text card__text--portfolio">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
+              perferendis exercitationem expedita cupiditate corporis debitis
+              ratione maxime itaque at quae.
+            </p>
+          </article>
+          <article class="card card--portfolio">
+            <img src="img/640x360.png" alt="Placeholder" class="card__image ">
+            <h3 class="card__title card__title--portfolio">Lorem ipsum</h3>
+            <time class="card__date " datetime="2305-07-13">07/13/2305</time>
+            <p class="card__text card__text--portfolio">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
+              perferendis exercitationem expedita cupiditate corporis debitis
+              ratione maxime itaque at quae.
+            </p>
+          </article>
+          <article class="card card--portfolio">
+            <img src="img/640x360.png" alt="Placeholder" class="card__image ">
+            <h3 class="card__title card__title--portfolio">Lorem ipsum</h3>
+            <time class="card__date " datetime="2305-07-13">07/13/2305</time>
+            <p class="card__text card__text--portfolio">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
+              perferendis exercitationem expedita cupiditate corporis debitis
+              ratione maxime itaque at quae.
+            </p>
+          </article>
+          <article class="card card--portfolio">
+            <img src="img/640x360.png" alt="Placeholder" class="card__image ">
+            <h3 class="card__title card__title--portfolio">Lorem ipsum</h3>
+            <time class="card__date " datetime="2305-07-13">07/13/2305</time>
+            <p class="card__text card__text--portfolio">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
+              perferendis exercitationem expedita cupiditate corporis debitis
+              ratione maxime itaque at quae.
+            </p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+
+    <div class="bg--primary section--spaced">
+
+
+      <section class="container " id="contact">
+        <h2 class="container__heading">Contact</h2>
+        <div class="container--contact">
+          <div class="container--contact-info">
+            <h3 class="container__subheading">What's your story? Get in touch</h3>
+            <p class="container__text">
+              Always available for freelancing if the right project comes along,
+              feel free to contact me.
+            </p>
+            <address class="info">
+              <div class="info__item">
+                <img src="img/map-marker-alt-solid.svg" alt="Map marker icon" class="info__icon">
+                <span class="info__text">
+                  Champ de Mars, 5 Av. Anatole France, 75007 Paris, Francie
+                </span>
+              </div>
+              <div class="info__item">
+                <img src="img/envelope-regular.svg" alt="Envelope icon" class="info__icon">
+                <span class="info__text">
+                  <a href="mailto:support@domain.com">support@domain.com</a>
+                </span>
+              </div>
+              <div class="info__item">
+                <img src="img/mobile-alt-solid.svg" alt="Mobile icon" class="info__icon">
+                <span class="info__text">
+                  <a href="tel:555-2368">555-2368</a>
+                </span>
+              </div>
+            </address>
+          </div>
+          <div class="container--contact-form">
+            <form class="form form--contact">
+              <h4 class="container__subheading">Say Something</h4>
+               <div class="form__group">
+                <div class="form__field form__field--name">
+                  <input type="text" name="full_name" placeholder="Full name" class="form__input">
+                </div>
+                <div class="form__field form__field--email">
+                  <input type="email" name="email" placeholder="Email address" class="form__input">
+                </div>
+                <div class="form__field form__field--subject">
+                  <input type="text" name="subject" placeholder="Subject" class="form__input">
+                </div>
+                <div class="form__field form__field--comment">
+                  <textarea name="comment" placeholder="Type comment" class="form__textarea"></textarea>
+                </div>
+                <div class="form__field form__field--button">
+                  <button class="form__button">Send Message</button>
+                </div>
+              </div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="container">
       <div class="map">
         <iframe class="map__iframe"
           src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=p%C5%99%C3%ADrodov%C4%9Bdeck%C3%A1%20fakulta%20upol+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
           allowfullscreen></iframe>
       </div>
-    </section>
+      </section>
+
+    </div>
   </main>
 
   <footer class="footer">
@@ -300,6 +350,7 @@
     </div>
     <span class="footer__copy">&copy; Lorem ipsum dolor sit amet 2022</span>
   </footer>
+
 </body>
 
 </html>
