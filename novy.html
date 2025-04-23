@@ -1,75 +1,76 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tomáš Křenek – 3D Flip Carousel</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://kit.fontawesome.com/35134bda87.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Flip Carousel</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/35134bda87.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-    <!-- Hlavní obsah -->
-    <div class="container">
-        <div class="small"></div>
-        <div class="big">
-            <div class="slides">
-                <div id="slide-1" class="slide active">1</div>
-                <div id="slide-2" class="slide">2</div>
-                <div id="slide-3" class="slide">3</div>
-                <div id="slide-4" class="slide">4</div>
-                <div id="slide-5" class="slide">5</div>
-                <div id="slide-6" class="slide">6</div>
+  <div class="container">
+    <div class="small"></div>
+    <div class="big">
+      <div class="slides">
+       
+        <div id="slide-1" class="slide active">
+          <h2>Vítejte na Carouselu</h2>
+          <p>Toto je úvodní slide s obrázkem.</p>
             </div>
+
+
+        <div id="slide-2" class="slide">
+          <div class="card">
+            <div class="card-item">Prvek 1</div>
+            <div class="card-item">Prvek 2</div>
+            <div class="card-item">Prvek 3</div>
+            <div class="card-item">Prvek 4</div>
+          </div>
         </div>
+
+      </div>
     </div>
+  </div>
 
-    <!-- Navigace mimo container -->
-    <ul class="nav">
-        <li><a href="#" data-slide="1"><i class="fa-solid fa-house"></i></a></li>
-        <li><a href="#" data-slide="2">2</a></li>
-        <li><a href="#" data-slide="3">3</a></li>
-        <li><a href="#" data-slide="4">4</a></li>
-        <li><a href="#" data-slide="5">5</a></li>
-        <li><a href="#" data-slide="6">6</a></li>
-    </ul>
+  <ul class="nav">
+    <li><a href="#" data-slide="1"><i class="fa-solid fa-house"></i></a></li>
+    <li><a href="#" data-slide="2">2</a></li>
+  </ul>
 
-    
+  <script>
+    const navLinks = document.querySelectorAll(".nav a");
+    const slides   = document.querySelectorAll(".slide");
+    let currentIndex = 0;
 
-    <script>
-        const navLinks = document.querySelectorAll(".nav a");
-        const slides   = document.querySelectorAll(".slide");
-        let currentIndex = 0;
+    function showSlide(index) {
+      if (index === currentIndex) return;
 
-        function showSlide(index) {
-            if (index === currentIndex) return;
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active", "previous");
+        if (i === currentIndex) slide.classList.add("previous");
+        else if (i === index)    slide.classList.add("active");
+      });
 
-            slides.forEach((slide, i) => {
-                slide.classList.remove("active", "previous");
-                if (i === currentIndex) slide.classList.add("previous");
-                else if (i === index)    slide.classList.add("active");
-            });
+      navLinks.forEach((link, i) => {
+        link.classList.toggle("active", i === index);
+      });
 
-            navLinks.forEach((link, i) => {
-                link.classList.toggle("active", i === index); // Nastavení aktivní třídy
-            });
+      currentIndex = index;
+    }
 
-            currentIndex = index;
-        }
+    document.addEventListener("DOMContentLoaded", () => {
+      showSlide(0);
+    });
 
-        // Nastavení prvního slidu jako aktivního při načtení
-        document.addEventListener("DOMContentLoaded", () => {
-            showSlide(0); // Index 0 odpovídá prvnímu slidu
-        });
-
-        navLinks.forEach(link => {
-            link.addEventListener("click", e => {
-                e.preventDefault();
-                const target = parseInt(link.getAttribute("data-slide"), 10) - 1;
-                showSlide(target);
-            });
-        });
-    </script>
+    navLinks.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const target = parseInt(link.getAttribute("data-slide"), 10) - 1;
+        showSlide(target);
+      });
+    });
+  </script>
 
 </body>
 </html>
