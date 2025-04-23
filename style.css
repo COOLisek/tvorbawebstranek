@@ -191,7 +191,7 @@ button:hover {
 
     .container {
         width: 100vw;
-        height: 92vh;
+        height: 92%;
         flex-direction: column;
         border-radius: 0;
     }
@@ -208,7 +208,7 @@ button:hover {
     /* Upravená navigace pro mobil */
     .nav {
         width: 100vw;
-        height: 8vh;
+        height: 8%;
         margin: 0;
         padding: 0;
         list-style: none;
