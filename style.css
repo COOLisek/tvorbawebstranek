@@ -45,12 +45,27 @@ body {
 
 .hero,
 .social,
-.tlacitko {
+.tlacitko{
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    color: white;
+}
+.role {
+    display: inline-block;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--bg-color);
+    transition: opacity 0.5s ease-in-out;
+}
+.hidden {
+    opacity: 0;
+}
+
+.copy{
+   
     color: white;
 }
 
@@ -64,6 +79,13 @@ body {
     font-size: 2em;
     flex-direction: row;
     gap: 0.2em;
+}
+
+.social a{
+    color: white;
+}
+.social a:hover{
+    color: var(--primary-color);
 }
 
 .me {

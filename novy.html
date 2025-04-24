@@ -20,14 +20,21 @@
                     <span class="subheading">Student Infomatiky</span>
                 </div>
                 <div class="social">
-                    <i class="fa-brands fa-square-instagram"></i>
-                    <i class="fa-brands fa-linkedin"></i>
+                    <a href="https://www.instagram.com/krenek.t/"> <i class="fa-brands fa-square-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/tom%C3%A1%C5%A1-k%C5%99enek-756347357/"> <i
+                            class="fa-brands fa-linkedin"></i></a>
                 </div>
             </div>
 
 
 
-            <div class="tlacitko"></div>
+            <div class="tlacitko">
+
+            </div>
+
+            <div class="copy">
+                &copy; 2025 Tomáš Křenek
+            </div>
 
         </div>
         <div class="big">
@@ -42,16 +49,18 @@
                                 <span class="subheading">Student Infomatiky</span>
                             </div>
                             <div class="social">
-                                <i class="fa-brands fa-square-instagram"></i>
-                                <i class="fa-brands fa-linkedin"></i>
+                                <a href="https://www.instagram.com/krenek.t/"> <i
+                                        class="fa-brands fa-square-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/tom%C3%A1%C5%A1-k%C5%99enek-756347357/"> <i
+                                        class="fa-brands fa-linkedin"></i></a>
                             </div>
                         </div>
 
                         <div class="home">
 
 
-                            <h2>W</h2>
-                            <p>Toto je úvodní slide s obrázkem.</p>
+                            <h2>Tomáš Křenek</h2>
+                            <span class="role" id="role">Back-end vývojář</span>
                         </div>
                     </div>
 
@@ -128,6 +137,24 @@
                 showSlide(target);
             });
         });
+
+
+        const roles = ["Back-end vývojář", "Student Informatiky", "Fotbalista", "Marketingový specialista"];
+       
+
+        function changeRoleText() {
+            const roleElement = document.getElementById("role");
+            roleElement.classList.add("hidden"); // Skryje text s animací
+
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % roles.length; // Posun na další text
+                roleElement.textContent = roles[currentIndex]; // Změna textu
+                roleElement.classList.remove("hidden"); // Zobrazení textu s animací
+            }, 500); // Čas odpovídající CSS přechodu (0.5s)
+        }
+
+        // Spustí změnu textu každé 3 sekundy
+        setInterval(changeRoleText, 3000);
     </script>
 
 </body>
