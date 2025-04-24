@@ -1,6 +1,6 @@
 /* style.css */
 :root {
-    --primary-color: #4646e9;
+    --primary-color: #e94677;
     --bg-color: #dad9d9;
     --slide-bg: #fff;
     --card-bg: #f66;
@@ -10,7 +10,38 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    scrollbar-width: thin;
+    /* „auto“ nebo „thin“ */
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    /* jezdec / dráha */
 }
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 8px;
+    /* tloušťka scrollbaru ve svislém směru */
+    height: 8px;
+    /* pro vodorovný scrollbar, pokud nějaký máš */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    /* pozadí „dráhy“ scrollbaru */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    /* samotný jezdec */
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    /* mírné zvýraznění při hoveru */
+}
+
+
 
 body {
     background-color: var(--bg-color);
@@ -29,7 +60,7 @@ body {
     width: 85vw;
     height: 70vh;
     max-width: 1300px;
-    background: linear-gradient(#0b7080, #0ba376);
+    background: linear-gradient(#800b0b, #e5345b);
     border-radius: 2em;
     overflow: hidden;
 }
@@ -45,7 +76,7 @@ body {
 
 .hero,
 .social,
-.tlacitko{
+.tlacitko {
     flex: 1;
     display: flex;
     align-items: center;
@@ -53,6 +84,7 @@ body {
     text-align: center;
     color: white;
 }
+
 .role {
     display: inline-block;
     font-size: 1.5em;
@@ -60,12 +92,13 @@ body {
     color: var(--bg-color);
     transition: opacity 0.5s ease-in-out;
 }
+
 .hidden {
     opacity: 0;
 }
 
-.copy{
-   
+.copy {
+
     color: white;
 }
 
@@ -81,10 +114,11 @@ body {
     gap: 0.2em;
 }
 
-.social a{
+.social a {
     color: white;
 }
-.social a:hover{
+
+.social a:hover {
     color: var(--primary-color);
 }
 
@@ -193,6 +227,54 @@ button:hover {
 }
 
 .nav a {
+    position: relative;
+    /* pro absolutně pozicovaný tooltip */
+    text-decoration: none;
+    color: #000;
+    font-size: 2em;
+}
+
+/* samotný tooltip */
+.nav a::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 110%;
+    /* vyskočí nad ikonu */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 0.3em 0.6em;
+    border-radius: 0.3em;
+    white-space: nowrap;
+    font-size: 0.75em;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 10;
+}
+
+/* šipka pod tooltipem */
+.nav a::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 10;
+}
+
+/* při hoveru zobraz */
+.nav a:hover::after,
+.nav a:hover::before {
+    opacity: 1;
+}
+
+.nav a {
     text-decoration: none;
     color: #000;
     font-size: 2em;
@@ -237,7 +319,7 @@ button:hover {
     .slide,
     .big {
         border-radius: 0;
-        
+
     }
 
     /* Zobrazit a stylovat hero-mobile */
@@ -252,9 +334,10 @@ button:hover {
 
     }
 
-    .social{
+    .social {
         margin-top: 0.3em;
     }
+
     .home {
         border-top-left-radius: 2em;
         border-top-right-radius: 2em;
@@ -262,7 +345,7 @@ button:hover {
     }
 
     #slide-1 {
-        background:linear-gradient(to right, #0b7080, #0ba376);
+        background: linear-gradient(to right, #800b0b, #e5345b);
         padding: 0;
     }
 
@@ -300,4 +383,11 @@ button:hover {
         color: var(--primary-color);
         font-weight: bold;
     }
+
+    .nav a::after,
+    .nav a::before {
+        display: none;
+    }
+
+
 }

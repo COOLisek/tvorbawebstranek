@@ -101,9 +101,18 @@
     </div>
 
     <ul class="nav">
-        <li><a href="#" data-slide="1"><i class="fa-solid fa-house"></i></a></li>
-        <li><a href="#" data-slide="2">2</a></li>
+        <li>
+            <a href="#" data-slide="1" data-tooltip="Domů">
+                <i class="fa-solid fa-house"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-slide="2" data-tooltip="Studium">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </a>
+        </li>
     </ul>
+
 
     <script>
         const navLinks = document.querySelectorAll(".nav a");
@@ -139,8 +148,8 @@
         });
 
 
-        const roles = ["Back-end vývojář", "Student Informatiky", "Fotbalista", "Marketingový specialista"];
-       
+        const roles = ["Back-end vývojář", "Student Informatiky", "Fotbalista", "Social media specialist"];
+
 
         function changeRoleText() {
             const roleElement = document.getElementById("role");
