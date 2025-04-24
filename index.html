@@ -1,27 +1,201 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tvorba webových stránek</title>
+    <title>3D Flip Carousel</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/35134bda87.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    Tento web je zaměřen na proklikávání na projekty tvorba webových stránek.
 
-    <a href="zapocet/index.html">Zápočet</a>
+    <div class="container">
+        <div class="small">
+            <div class="hero">
+                <img class="me" src="img/me.jpeg" alt="">
+                <div class="heading">
+                    <h1>Tomáš Křenek</h1>
+                    <span class="subheading">Student Infomatiky</span>
+                </div>
+                <div class="social">
+                    <a href="https://www.instagram.com/krenek.t/"> <i class="fa-brands fa-square-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/tom%C3%A1%C5%A1-k%C5%99enek-756347357/"> <i
+                            class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
 
-    <ul>
-        <li><a href="1_cv/index.html">První cvičení</a></li>
-        <li><a href="2_cv/index.html">Druhé cvičení</a></li>
-        <li><a href="3_cv/index.html">Třetí cvičení</a></li>
-        <li><a href="4_cv/index.html">Čtvrté cvičení</a></li>
-        <li><a href="5_cv/index.html">Páté cvičení</a></li>
-        <li><a href="6_cv/index.html">Šesté cvičení</a></li>
-        <li><a href="7_cv/index.html">Sedmé cvičení</a></li>
-        <li><a href="novy.html">Nový index</a></li>
+
+
+            <div class="tlacitko">
+                <a href="stary.html" class="btn">Tvorba webových stránek</a>
+            </div>
+
+            <div class="copy">
+                &copy; 2025 Tomáš Křenek
+            </div>
+
+        </div>
+        <div class="big">
+            <div class="slides">
+
+                <div id="slide-1" class="slide active">
+                    <div class="home-mobile">
+                        <div class="hero-mobile">
+                            <img class="me" src="img/me.jpeg" alt="">
+                            <div class="heading">
+                                <h1>Tomáš Křenek</h1>
+                                <span class="subheading">Student Infomatiky</span>
+                            </div>
+                            <div class="social">
+                                <a href="https://www.instagram.com/krenek.t/"> <i
+                                        class="fa-brands fa-square-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/tom%C3%A1%C5%A1-k%C5%99enek-756347357/"> <i
+                                        class="fa-brands fa-linkedin"></i></a>
+                            </div>
+                            <div class="tlacitko">
+                                <a href="stary.html" class="btn">Tvorba webových stránek</a>
+                            </div>
+                        </div>
+
+                        <div class="home">
+
+
+                            <h2>Tomáš Křenek</h2>
+                            <span class="role" id="role">Back-end vývojář</span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div id="slide-2" class="slide">
+                    <div class="slide-container">
+                        <div class="container-in">
+
+                            <h3 class="heading-in">Studium</h3>
+
+
+                            <div class="card-study">
+                                <img src="img/upol-logo.png" alt="OA-logo" class="card-logo">
+
+                                <h4 class="heading-card">
+                                    <i class="fas fa-school"></i> OAVM
+                                </h4>
+
+                                <span class="obor">
+                                    <i class="fas fa-laptop-code"></i> Informatika
+                                </span>
+
+                                <span class="study-type">
+                                    <i class="fas fa-graduation-cap"></i> Bakalřáské studium
+                                </span>
+
+                                <div class="study-time">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <time datetime="2020">2024</time> <span>-</span>
+                                    <time datetime="2025">Součastnost</time>
+                                </div>
+                            </div>
+
+                            <div class="card-study">
+                                <img src="img/oa-logo.png" alt="OA-logo" class="card-logo">
+
+                                <h4 class="heading-card">
+                                    <i class="fas fa-school"></i> OAVM
+                                </h4>
+
+                                <span class="obor">
+                                    <i class="fas fa-laptop-code"></i> Informační technologie
+                                </span>
+
+                                <span class="study-type">
+                                    <i class="fas fa-graduation-cap"></i> Maturita
+                                </span>
+
+                                <div class="study-time">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <time datetime="2020">2020</time> <span>-</span>
+                                    <time datetime="2024">2024</time>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav">
+        <li>
+            <a href="#" data-slide="1" data-tooltip="Domů">
+                <i class="fa-solid fa-house"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-slide="2" data-tooltip="Studium">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </a>
+        </li>
     </ul>
 
-<a href="funkce.xlsx">Sedmé cvičení</a>
-    
+
+    <script>
+        const navLinks = document.querySelectorAll(".nav a");
+        const slides = document.querySelectorAll(".slide");
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            if (index === currentIndex) return;
+
+            slides.forEach((slide, i) => {
+                slide.classList.remove("active", "previous");
+                if (i === currentIndex) slide.classList.add("previous");
+                else if (i === index) slide.classList.add("active");
+            });
+
+            navLinks.forEach((link, i) => {
+                link.classList.toggle("active", i === index);
+            });
+
+            currentIndex = index;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            showSlide(0);
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener("click", e => {
+                e.preventDefault();
+                const target = parseInt(link.getAttribute("data-slide"), 10) - 1;
+                showSlide(target);
+            });
+        });
+
+
+        const roles = ["Back-end vývojář", "Student Informatiky", "Fotbalista", "Social media specialist"];
+
+
+        function changeRoleText() {
+            const roleElement = document.getElementById("role");
+            roleElement.classList.add("hidden"); // Skryje text s animací
+
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % roles.length; // Posun na další text
+                roleElement.textContent = roles[currentIndex]; // Změna textu
+                roleElement.classList.remove("hidden"); // Zobrazení textu s animací
+            }, 500); // Čas odpovídající CSS přechodu (0.5s)
+        }
+
+        // Spustí změnu textu každé 3 sekundy
+        setInterval(changeRoleText, 3000);
+    </script>
+
 </body>
+
 </html>
