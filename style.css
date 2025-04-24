@@ -347,6 +347,11 @@ button:hover {
     font-size: 1.2rem;
 }
 
+.btn:hover{
+    background-color: white;
+    color:var(--primary-color);
+}
+
 @media screen and (max-width: 1199px) {
     .big {
         flex: 2;
