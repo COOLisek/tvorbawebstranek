@@ -245,9 +245,12 @@ body {
 .card-logo {
     width: auto;
     height: 100px;
-    max-width: 100%; /* Zajistí, že obrázek nepřesáhne šířku rodiče */
-    height: auto; /* Zachová poměr stran při zmenšování */
-    object-fit: contain; /* Přizpůsobí obrázek bez oříznutí */
+    max-width: 100%;
+    /* Zajistí, že obrázek nepřesáhne šířku rodiče */
+    height: auto;
+    /* Zachová poměr stran při zmenšování */
+    object-fit: contain;
+    /* Přizpůsobí obrázek bez oříznutí */
 }
 
 /* desktop: .hero-mobile schováme */
@@ -333,7 +336,7 @@ button:hover {
     font-weight: bold;
 }
 
-.btn{
+.btn {
     text-align: center;
     padding: 1em;
     border-radius: 2em;
@@ -353,17 +356,24 @@ button:hover {
 @media screen and (max-width: 959px) {
     body {
         flex-direction: column;
-        overflow: auto; /* změna z hidden na auto */
+        overflow: auto;
     }
-    
+
     .container {
         width: 100vw;
-        /* height: 100vh;  TUTO ŘÁDKU SMAZAT */
         flex-direction: column;
         border-radius: 0;
-        min-height: 100vh; /* místo pevné výšky použít min-height */
+        min-height: 100vh;
+        /* místo pevné výšky použít min-height */
     }
-    
+
+    .container-in {
+        /* nastavte podle potřeby tak, aby se vešel nad navigaci/footer */
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .hero {
         display: flex;
         padding: 2em;
@@ -405,7 +415,8 @@ button:hover {
         border-top-right-radius: 2em;
         background-color: white;
     }
-    .slide{
+
+    .slide {
         padding: 4vh;
     }
 
