@@ -342,8 +342,17 @@ button:hover {
 @media screen and (max-width: 959px) {
     body {
         flex-direction: column;
+        overflow: auto; /* změna z hidden na auto */
     }
-
+    
+    .container {
+        width: 100vw;
+        /* height: 100vh;  TUTO ŘÁDKU SMAZAT */
+        flex-direction: column;
+        border-radius: 0;
+        min-height: 100vh; /* místo pevné výšky použít min-height */
+    }
+    
     .hero {
         display: flex;
         padding: 2em;
@@ -351,12 +360,7 @@ button:hover {
         flex-direction: column;
     }
 
-    .container {
-        width: 100vw;
-        height: 100vh;
-        flex-direction: column;
-        border-radius: 0;
-    }
+
 
     .small {
         display: none;
@@ -365,6 +369,7 @@ button:hover {
     .slide,
     .big {
         border-radius: 0;
+        padding: 0;
 
     }
 
@@ -388,6 +393,9 @@ button:hover {
         border-top-left-radius: 2em;
         border-top-right-radius: 2em;
         background-color: white;
+    }
+    .slide{
+        padding: 4vh;
     }
 
     #slide-1 {
