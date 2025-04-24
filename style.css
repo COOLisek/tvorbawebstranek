@@ -368,21 +368,10 @@ button:hover {
     }
 
     .container-in {
-        /* povolit scroll, ale skrýt jeho vizuál */
+        /* nastavte podle potřeby tak, aby se vešel nad navigaci/footer */
+        max-height: calc(100vh - 100px);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-
-        /* Firefox */
-        scrollbar-width: none;
-        /* IE10+ */
-        -ms-overflow-style: none;
-    }
-
-    /* Chrome, Edge, Safari */
-    .container-in::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-        background: transparent;
     }
 
     .hero {
