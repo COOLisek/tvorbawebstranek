@@ -1,76 +1,135 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3D Flip Carousel</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://kit.fontawesome.com/35134bda87.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Flip Carousel</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/35134bda87.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
-  <div class="container">
-    <div class="small"></div>
-    <div class="big">
-      <div class="slides">
-       
-        <div id="slide-1" class="slide active">
-          <h2>W</h2>
-          <p>Toto je úvodní slide s obrázkem.</p>
+    <div class="container">
+        <div class="small">
+            <div class="hero">
+                <img class="me" src="img/me.jpeg" alt="">
+                <div class="heading">
+                    <h1>Tomáš Křenek</h1>
+                    <span class="subheading">Student Infomatiky</span>
+                </div>
+                <div class="social">
+                    <i class="fa-brands fa-square-instagram"></i>
+                    <i class="fa-brands fa-linkedin"></i>
+                </div>
             </div>
 
 
-        <div id="slide-2" class="slide">
-          <div class="card">
-            <div class="card-item">Prvek 1</div>
-            <div class="card-item">Prvek 2</div>
-            <div class="card-item">Prvek 3</div>
-            <div class="card-item">Prvek 4</div>
-          </div>
+
+            <div class="tlacitko"></div>
+
         </div>
+        <div class="big">
+            <div class="slides">
 
-      </div>
+                <div id="slide-1" class="slide active">
+                    <div class="home-mobile">
+                        <div class="hero-mobile">
+                            <img class="me" src="img/me.jpeg" alt="">
+                            <div class="heading">
+                                <h1>Tomáš Křenek</h1>
+                                <span class="subheading">Student Infomatiky</span>
+                            </div>
+                            <div class="social">
+                                <i class="fa-brands fa-square-instagram"></i>
+                                <i class="fa-brands fa-linkedin"></i>
+                            </div>
+                        </div>
+
+                        <div class="home">
+
+
+                            <h2>W</h2>
+                            <p>Toto je úvodní slide s obrázkem.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div id="slide-2" class="slide">
+                    <div class="card">
+                        <div class="card-item">Prvek 1</div>
+                        <div class="card-item">Prvek 2</div>
+                        <div class="card-item">Prvek 3</div>
+                        <div class="card-item">Prvek 4</div>
+                        <div class="card-item">Prvek 1</div>
+                        <div class="card-item">Prvek 2</div>
+                        <div class="card-item">Prvek 3</div>
+                        <div class="card-item">Prvek 4</div>
+                        <div class="card-item">Prvek 1</div>
+                        <div class="card-item">Prvek 2</div>
+                        <div class="card-item">Prvek 3</div>
+                        <div class="card-item">Prvek 4</div>
+                        <div class="card-item">Prvek 1</div>
+                        <div class="card-item">Prvek 2</div>
+                        <div class="card-item">Prvek 3</div>
+                        <div class="card-item">Prvek 4</div>
+                        <div class="card-item">Prvek 1</div>
+                        <div class="card-item">Prvek 2</div>
+                        <div class="card-item">Prvek 3</div>
+                        <div class="card-item">Prvek 4</div>
+                        <div class="card-item">Prvek 1</div>
+                        <div class="card-item">Prvek 2</div>
+                        <div class="card-item">Prvek 3</div>
+                        <div class="card-item">Prvek 4</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
-  </div>
 
-  <ul class="nav">
-    <li><a href="#" data-slide="1"><i class="fa-solid fa-house"></i></a></li>
-    <li><a href="#" data-slide="2">2</a></li>
-  </ul>
+    <ul class="nav">
+        <li><a href="#" data-slide="1"><i class="fa-solid fa-house"></i></a></li>
+        <li><a href="#" data-slide="2">2</a></li>
+    </ul>
 
-  <script>
-    const navLinks = document.querySelectorAll(".nav a");
-    const slides   = document.querySelectorAll(".slide");
-    let currentIndex = 0;
+    <script>
+        const navLinks = document.querySelectorAll(".nav a");
+        const slides = document.querySelectorAll(".slide");
+        let currentIndex = 0;
 
-    function showSlide(index) {
-      if (index === currentIndex) return;
+        function showSlide(index) {
+            if (index === currentIndex) return;
 
-      slides.forEach((slide, i) => {
-        slide.classList.remove("active", "previous");
-        if (i === currentIndex) slide.classList.add("previous");
-        else if (i === index)    slide.classList.add("active");
-      });
+            slides.forEach((slide, i) => {
+                slide.classList.remove("active", "previous");
+                if (i === currentIndex) slide.classList.add("previous");
+                else if (i === index) slide.classList.add("active");
+            });
 
-      navLinks.forEach((link, i) => {
-        link.classList.toggle("active", i === index);
-      });
+            navLinks.forEach((link, i) => {
+                link.classList.toggle("active", i === index);
+            });
 
-      currentIndex = index;
-    }
+            currentIndex = index;
+        }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      showSlide(0);
-    });
+        document.addEventListener("DOMContentLoaded", () => {
+            showSlide(0);
+        });
 
-    navLinks.forEach(link => {
-      link.addEventListener("click", e => {
-        e.preventDefault();
-        const target = parseInt(link.getAttribute("data-slide"), 10) - 1;
-        showSlide(target);
-      });
-    });
-  </script>
+        navLinks.forEach(link => {
+            link.addEventListener("click", e => {
+                e.preventDefault();
+                const target = parseInt(link.getAttribute("data-slide"), 10) - 1;
+                showSlide(target);
+            });
+        });
+    </script>
 
 </body>
+
 </html>
