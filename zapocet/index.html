@@ -6,20 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <title>4 úkol</title>
+  <title>Jane Doe</title>
 </head>
-
+ 
 <body>
   <header class="header">
     <div class="header__content">
-      <div class="header__info flex__small-item">
+      <div class="header__info container__small-item">
         <span class="header__preheading">Hello, My name is</span>
         <h1 class="header__heading header__heading--primary">Jane Doe</h1>
         <span class="header__heading header__heading--secondary">Full-Stack Developer</span>
-        <p>
+        <p class="text--secondary">
           I design and develop services for customers of all sizes, specializing
           in creating stylish, modern websites, web services and online stores.
         </p>
@@ -34,54 +33,58 @@
           </ul>
         </nav>
       </div>
-      <div class="header__image flex__small-item">
+      <div class="header__image container__small-item">
         <img src="img/avatar.svg" alt="Portrait of Jane Doe" class="header__img">
       </div>
     </div>
   </header>
   <main>
-    <div class="bg--primary container--spaced">
+    <div class="bg--primary ">
       <div class="layout">
         <section id="biography">
-          <div class="container container--primary card--center">
-            <div class="card__part--small">
-              <figure class="card flex__small-item card--with-photo card--center">
-                <img src="img/avatar.svg" alt="Portrait of Jane Doe" class="card__image--primary flex__small-item">
-                <figcaption class="card__caption flex__small-item">
-                  <span class="card__heading--primary flex__small-item">Jane Doe</span>
-                  <span class="card__heading--secondary flex__small-item">Full-Stack Developer</span>
-                </figcaption>
-              </figure>
-            </div>
-            <div class="card__part--large padding--large">
-              <h2 class="container__heading">Biography</h2>
-              <div class="container__text--primary">
-                <p class="container__paragraph">
-                  I'm a Freelancer Front-end Developer with over 3 years of experience.
-                  I'm from San Francisco. I code and create web elements for amazing people
-                  around the world. I like work with new people. New people, new experiences.
-                </p>
-                <p class="container__paragraph">
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor. Lorem ipsum dolor sit
-                  amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua.
-                </p>
-                <p class="container__paragraph">
-                  Consectetur adipisicing elit, lorem ipsum dolor sit amet, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                  dolor.
-                </p>
+          <div class="container">
+            <div class="container container--primary card--center">
+              <div class="card__part--small ">
+                <figure class="card container__small-item card--with-photo card--center">
+                  <img src="img/avatar.svg" alt="Portrait of Jane Doe"
+                    class="card__image--primary container__small-item">
+                  <figcaption class="card__caption container__small-item">
+                    <span class="card__heading--primary container__small-item">Jane Doe</span>
+                    <span class="card__heading--secondary container__small-item">Full-Stack Developer</span>
+                  </figcaption>
+                </figure>
+              </div>
+
+              <div class="card__part--large">
+                <h2 class="container__heading container__heading--secondary">Biography</h2>
+                <div class="container__text--primary">
+                  <p class="container__paragraph">
+                    I'm a Freelancer Front-end Developer with over 3 years of experience.
+                    I'm from San Francisco. I code and create web elements for amazing people
+                    around the world. I like work with new people. New people, new experiences.
+                  </p>
+                  <p class="container__paragraph">
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor. Lorem ipsum dolor sit
+                    amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
+                  </p>
+                  <p class="container__paragraph">
+                    Consectetur adipisicing elit, lorem ipsum dolor sit amet, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                    dolor.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </section>
         <div class="separator"></div>
-        <section id="services">
+        <section id="services" class="section__spaced--large padding--bottom">
           <h2 class="container__heading">What I do?</h2>
           <div class="container">
-            <div class="card flex__small-item card--decorated">
+            <article class="card container__small-item card--decorated">
               <img src="img/pencil-alt-solid.svg" alt="Pencil" class="card__icon">
               <h3 class="card__heading">Web Design</h3>
               <p class="card__text">
@@ -90,8 +93,8 @@
                 consectetur id saepe doloribus eveniet aliquam aperiam dolores atque nisi a,
                 dignissimos eum.
               </p>
-            </div>
-            <div class="card flex__small-item card--decorated">
+            </article>
+            <article class="card container__small-item card--decorated">
               <img src="img/desktop-solid.svg" alt="Desktop" class="card__icon">
               <h3 class="card__heading">Web Development</h3>
               <p class="card__text">
@@ -100,8 +103,8 @@
                 consectetur id saepe doloribus eveniet aliquam aperiam dolores atque nisi a,
                 dignissimos eum.
               </p>
-            </div>
-            <div class="card flex__small-item card--decorated">
+            </article>
+            <article class="card container__small-item card--decorated">
               <img src="img/bullseye-solid.svg" alt="Bullseye" class="card__icon">
               <h3 class="card__heading">Seo Marketing</h3>
               <p class="card__text">
@@ -110,21 +113,21 @@
                 consectetur id saepe doloribus eveniet aliquam aperiam dolores atque nisi a,
                 dignissimos eum.
               </p>
-            </div>
+            </article>
           </div>
         </section>
-        <section id="awards">
+        <section id="awards" class="section__spaced--normal padding--bottom">
           <h2 class="container__heading">Awards</h2>
           <div class="container container--row container--sm--column">
-            <div class="card flex__small-item card--center card--secondary padding--medium bg--secondary">
+            <div class="card container__small-item card--center card--secondary padding--medium bg--secondary">
               <img src="img/trophy-solid.svg" alt="Trophy" class="card__icon">
               <span class="card__heading--tertiary">Creative Designer</span>
             </div>
-            <div class="card flex__small-item card--center card--secondary padding--medium bg--secondary">
+            <div class="card container__small-item card--center card--secondary padding--medium bg--secondary">
               <img src="img/trophy-solid.svg" alt="Trophy" class="card__icon">
               <span class="card__heading--tertiary">Yearly Best Performer</span>
             </div>
-            <div class="card flex__small-item card--center card--secondary padding--medium bg--secondary">
+            <div class="card container__small-item card--center card--secondary padding--medium bg--secondary">
               <img src="img/trophy-solid.svg" alt="Trophy" class="card__icon">
               <span class="card__heading--tertiary">Best Learner Award</span>
             </div>
@@ -132,12 +135,12 @@
         </section>
       </div>
     </div>
-    <div class="bg--secondary section--spaced">
+    <div class="bg--secondary ">
       <div class="layout">
-        <section id="experience">
-          <h2 class="container__heading">Experience</h2>
+        <section id="experience" class="section__spaced--large padding--bottom">
           <div class="container container--list">
-            <article class="card flex__small-item card--primary">
+            <h2 class="container__heading">Experience</h2>
+            <article class="card container__small-item card--primary">
               <div class="card__part--small">
                 <div class="card__period">
                   <time class="card__time" datetime="2021-02">Feb 2021</time> -
@@ -154,7 +157,7 @@
                 </p>
               </div>
             </article>
-            <article class="card flex__small-item card--primary">
+            <article class="card container__small-item card--primary">
               <div class="card__part--small">
                 <div class="card__period">
                   <time class="card__time" datetime="2020-03">Mar 2020</time> -
@@ -171,7 +174,7 @@
                 </p>
               </div>
             </article>
-            <article class="card flex__small-item card--primary">
+            <article class="card container__small-item card--primary">
               <div class="card__part--small">
                 <div class="card__period">
                   <time class="card__time" datetime="2019-01">Jan 2019</time> -
@@ -190,10 +193,11 @@
             </article>
           </div>
         </section>
-        <section id="portfolio">
+        <section id="portfolio" class="section__spaced--normal padding--bottom">
+
           <h2 class="container__heading">My portfolio</h2>
-          <div class="container container--grid">
-            <article class="card flex__small-item">
+          <div class="container--grid">
+            <article class="card container__small-item">
               <img src="img/640x360.png" alt="Placeholder" class="card__image">
               <h3 class="card__heading card__heading--small">Lorem ipsum</h3>
               <time class="card__date" datetime="2305-07-13">07/13/2305</time>
@@ -202,7 +206,7 @@
                 cupiditate corporis debitis ratione maxime itaque at quae.
               </p>
             </article>
-            <article class="card flex__small-item">
+            <article class="card container__small-item">
               <img src="img/640x360.png" alt="Placeholder" class="card__image">
               <h3 class="card__heading card__heading--small">Lorem ipsum</h3>
               <time class="card__date" datetime="2305-07-13">07/13/2305</time>
@@ -211,7 +215,7 @@
                 cupiditate corporis debitis ratione maxime itaque at quae.
               </p>
             </article>
-            <article class="card flex__small-item">
+            <article class="card container__small-item">
               <img src="img/640x360.png" alt="Placeholder" class="card__image">
               <h3 class="card__heading card__heading--small">Lorem ipsum</h3>
               <time class="card__date" datetime="2305-07-13">07/13/2305</time>
@@ -220,7 +224,7 @@
                 cupiditate corporis debitis ratione maxime itaque at quae.
               </p>
             </article>
-            <article class="card flex__small-item">
+            <article class="card container__small-item">
               <img src="img/640x360.png" alt="Placeholder" class="card__image">
               <h3 class="card__heading card__heading--small">Lorem ipsum</h3>
               <time class="card__date" datetime="2305-07-13">07/13/2305</time>
@@ -229,7 +233,7 @@
                 cupiditate corporis debitis ratione maxime itaque at quae.
               </p>
             </article>
-            <article class="card flex__small-item">
+            <article class="card container__small-item">
               <img src="img/640x360.png" alt="Placeholder" class="card__image">
               <h3 class="card__heading card__heading--small">Lorem ipsum</h3>
               <time class="card__date" datetime="2305-07-13">07/13/2305</time>
@@ -238,7 +242,7 @@
                 cupiditate corporis debitis ratione maxime itaque at quae.
               </p>
             </article>
-            <article class="card flex__small-item">
+            <article class="card container__small-item">
               <img src="img/640x360.png" alt="Placeholder" class="card__image">
               <h3 class="card__heading card__heading--small">Lorem ipsum</h3>
               <time class="card__date" datetime="2305-07-13">07/13/2305</time>
@@ -248,21 +252,22 @@
               </p>
             </article>
           </div>
+
         </section>
       </div>
     </div>
-    <div class="bg--primary section--spaced">
+    <div class="bg--primary ">
       <div class="layout">
         <section id="contact">
-          <h2 class="container__heading">Contact</h2>
-          <div class="container padding--medium">
-            <div class="flex__small-item">
+          <h2 class="container__heading section__spaced--large">Contact</h2>
+          <div class="container ">
+            <div class="container__small-item">
               <h3 class="container__subheading">What's your story? Get in touch</h3>
               <p class="container__text--primary">
                 Always available for freelancing if the right project comes along, feel free to contact me.
               </p>
-              <address>
-                <div class="container--item">
+              <address class="">
+                <div class="container--item ">
                   <img src="img/map-marker-alt-solid.svg" alt="Map marker icon" class="container__icon">
                   <span class="container__text--secondary padding--medium">
                     Champ de Mars, 5 Av. Anatole France, 75007 Paris, Francie
@@ -282,7 +287,7 @@
                 </div>
               </address>
             </div>
-            <div class="padding--medium flex__small-item">
+            <div class="container__small-item">
               <form>
                 <h3 class="container__subheading">Say Something</h3>
                 <div class="form__group">
@@ -306,22 +311,23 @@
             </div>
           </div>
         </section>
-        <section id="map">
-          <div>
-            <iframe class="embed--responsive"
-              src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=p%C5%99%C3%ADrodov%C4%9Bdeck%C3%A1%20fakulta%20upol+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-              allowfullscreen></iframe>
-          </div>
-        </section>
+
+        <div class="embed">
+          <iframe class="embed--responsive"
+            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=p%C5%99%C3%ADrodov%C4%9Bdeck%C3%A1%20fakulta%20upol+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+            allowfullscreen></iframe>
+        </div>
+
       </div>
     </div>
   </main>
-  <footer class="footer">
-    <div class="flex__small-item">
-      <img src="img/facebook-square-brands.svg" alt="Facebook icon" class="social__icon">
-      <img src="img/twitter-square-brands.svg" alt="Twitter icon" class="social__icon">
-    </div>
-    <span class="footer__copy flex__small-item">&copy; Lorem ipsum dolor sit amet 2022</span>
+  <footer class="footer ">
+      <div class="container__small-item ">
+        <img src="img/facebook-square-brands.svg" alt="Facebook icon" class="social__icon">
+        <img src="img/twitter-square-brands.svg" alt="Twitter icon" class="social__icon">
+      </div>
+      <span class="footer__copy container__small-item ">&copy; Lorem ipsum dolor sit amet 2022</span>
+    
   </footer>
 </body>
 
