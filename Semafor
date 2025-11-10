@@ -1,0 +1,613 @@
+;;;globální proměné
+(defvar *semaphore-width*)
+(setf *semaphore-width* 10)
+(defvar *light-radius*)
+(setf *light-radius* (* (/ *semaphore-width* 2) 0.9))
+(defvar *cross-road-wh*)
+(setf *cross-road-wh* (* 50 *semaphore-width*))
+(defvar *programs-light*)
+(setf *programs-light* '((:two . ((t nil) (nil t)))
+                   (:tree . ((t nil nil) (t t nil) (nil nil t) (nil t nil)))
+                   (:one . ((nil) (t)))))
+(defvar *semafor-programs*)
+(setf *semafor-programs* '((:pedestrian
+                            make-pedestrian-semaphore
+                            :two
+                            )
+                           (:vehicle
+                            make-vehicle-semaphore
+                            :tree
+                            )
+                           (:arrow
+                            make-arrow-semaphore
+                            :one)
+                           (:pedestrian-warning
+                            make-warning-semaphore
+                            :one)
+                           (:cycle
+                            make-cycle-semaphore
+                            :tree)
+                           (:top-right
+                            make-arrow-top-right-semaphore
+                            :tree)
+                           (:arrow-left
+                            make-arrow-left
+                            :tree)))
+
+
+;;;
+;;; Semafor
+;;;
+
+(defclass semaphore (abstract-picture)
+  ((semaphore-type :initform :vehicle)
+   (current-phase :initform 0)
+   (phase-count :initform 0))
+   (:documentation "Objekt semaforu"))
+
+(defmethod initialize-instance ((s semaphore))  
+  "Funkce pro inicializaci semaforu který bude pro chodce"
+  (call-next-method)
+  (setf (slot-value s 'phase-count) (length (semaphore-programe s)))
+  (do-set-items s (make-vehicle-semaphore))
+  (set-semaphore-light s))
+
+
+;;;
+;;; Funkce na vytváření semaforů
+;;;
+
+(defun make-warning-semaphore ()
+  "Funkce na vytvoření semaforu který informuje o chodcích"
+  (list 
+   (set-on-color (toggle (set-radius 
+                          (set-off-color
+                           (make-instance 'light) 
+                           :black) 
+                          *light-radius*)) 
+                 :orange)
+   (set-color (set-filledp (make-my-quadrilateral *semaphore-width*) t) :LIGHTSTEELBLUE)))
+
+
+(defun make-arrow-top-right-semaphore ()
+  "Funkce na vytvoření semaforu pro chodce"
+  (let ((up (* -1 *semaphore-width*))
+        (down  *semaphore-width*))
+    (append (list (move (make-arrow-straitgh-right) 0 up) 
+                  (make-arrow-straitgh-right) 
+                  (move (make-arrow-straitgh-right) 0 down))
+            (make-tree-light-semaphore))))
+
+(defun make-arrow-left ()
+  "Funkce na vytvoření semaforu pro chodce"
+  (let ((up (* -1 *semaphore-width*))
+        (down  *semaphore-width*))
+    (append (list (move  (make-arrow :left) 0 up) 
+                  (make-arrow :left) 
+                  (move (make-arrow :left) 0 down))
+            (make-tree-light-semaphore))))
+
+(defun make-arrow-semaphore ()
+  "Funkce na vytvoření semaforu pro chodce"
+  (list 
+   (make-arrow)
+   (set-on-color (toggle (set-radius 
+                          (set-off-color
+                           (make-instance 'light) 
+                           :black) 
+                          *light-radius*)) 
+                 :green)
+   (set-color (set-filledp (make-my-quadrilateral *semaphore-width*) t) :LIGHTSTEELBLUE)))
+
+(defun make-cycle-semaphore ()
+  "Funkce na vytvoření semaforu pro chodce"
+  (let ((up (* -1 *semaphore-width*))
+        (down  *semaphore-width*))
+    (append (list (move (make-cycle) 0 up) (make-cycle) (move (make-cycle) 0 down))
+            (make-tree-light-semaphore))))
+
+(defun make-pedestrian-semaphore ()
+  "Funkce na vytvoření semaforu pro chodce"
+   (list 
+     (move (set-on-color 
+            (set-radius 
+             (set-off-color 
+              (make-instance 'light) 
+              :black) 
+             *light-radius*) 
+            :red) 0 (* -1/2 *semaphore-width*))
+     (move (set-on-color 
+             (set-radius 
+              (set-off-color 
+               (make-instance 'light) 
+               :black) 
+              *light-radius*) 
+            :green) 0 (* 1/2 *semaphore-width*))
+     (set-color 
+      (set-filledp
+       (make-my-quadrilateral *semaphore-width* :b (* 2 *semaphore-width*)) t) :LIGHTSTEELBLUE)))
+
+(defun make-vehicle-semaphore ()
+  "Funkce na vytvoření semaforu pro auta"
+  (make-tree-light-semaphore))
+
+(defun make-tree-light-semaphore ()
+  (list 
+   (move 
+    (set-on-color 
+     (set-radius 
+      (set-off-color 
+       (make-instance 'light) 
+       :black) 
+      *light-radius*) 
+     :red) 0 (* -1 *semaphore-width*))
+   (set-on-color 
+    (set-radius 
+     (set-off-color 
+      (make-instance 'light) 
+      :black) 
+     *light-radius*) 
+    :orange)
+   (move
+    (set-on-color 
+     (toggle 
+      (set-radius 
+       (set-off-color 
+        (make-instance 'light) 
+        :black) *light-radius*)) 
+     :green) 0 *semaphore-width*)
+   (set-color (set-filledp (make-my-quadrilateral *semaphore-width* :b (* 3 *semaphore-width*)) t) :LIGHTSTEELBLUE)))
+
+
+
+
+
+;;;
+;;; settery a gettery
+;;;
+
+(defmethod current-phase ((shape semaphore))
+  "Vrací hodnotu slotu faze semaforu"
+  (slot-value shape 'current-phase))
+
+(defmethod set-current-phase ((shape semaphore) value)
+  "Public metoda na nastavení fáze a změny světla"
+  (changing shape)
+  (do-set-current-phase shape value)
+  (set-semaphore-light shape)
+  (change shape)
+  shape)
+
+(defmethod do-set-current-phase ((shape semaphore) value)
+  "Prodected metoda na nastavení aktální fáze"
+  (setf (slot-value shape 'current-phase) value)
+  shape)
+
+(defmethod phase-count ((s semaphore))
+  "Vrací hodnotu phase-count"
+  (slot-value s 'phase-count)) 
+
+
+
+(defmethod set-semaphore-type ((s semaphore) type)
+  (let ((list (find type *semafor-programs* :key #'car)))
+    (unless list
+      (error "Takový typ semaforu nejde nastavit"))
+    (let* ((fun (second list))
+           (items (funcall fun)))
+      (setf (slot-value s 'semaphore-type) type)
+      (do-set-items s items)
+      (setf (slot-value s 'current-phase) 0)
+      (set-semaphore-light s)
+      (setf (slot-value s 'phase-count) (length (semaphore-programe s)))))
+  s)
+
+  
+
+;;;
+;;; Nastavní světel semaforu
+;;;
+
+(defmethod semaphore-programe ((s semaphore))
+  "Vrací program pro daný typ semaforu"
+  (semaphore-type-programe s))
+
+(defmethod current-semaphore-programe ((s semaphore))
+  "Vrací pro katuální fázi program "
+  (car (nthcdr (current-phase s) (semaphore-programe s))))
+
+(defmethod set-semaphore-light ((s semaphore))
+  "Nastaví všem světlům jestli mají být rosvícené nebo ne"
+  (let ((items (slot-value s 'items)))
+    (dolist (item (current-semaphore-programe s))
+      (when items
+        (set-onp (car items) item)
+        (setf items (cdr items)))) )
+    s)
+
+(defmethod set-semaphore-light ((s semaphore))
+  "Nastaví všem světlům jestli mají být rosvícené nebo ne"
+  (let ((items (remove-if (lambda (x) (not (classp x 'light))) (slot-value s 'items))))
+    (dolist (item (current-semaphore-programe s))
+      (when items
+        (set-onp (car items) item)
+        (setf items (cdr items)))) )
+    s)
+
+(defmethod next-phase ((s semaphore))
+  "Přepníná na další fázi semforu"
+  (if (= (phase-count s) (1+(current-phase s)))
+      (set-current-phase s 0)
+    (set-current-phase s (1+ (current-phase s))))
+  s)
+
+(defmethod semaphore-type-programe ((s semaphore))
+  "Programy pro nastavení jednotlivých semaforů"
+  (cdr (find (third (find (slot-value s 'semaphore-type)
+                *semafor-programs*
+        :key #'car))
+             *programs-light*
+        :key #'car)))
+
+
+
+
+
+
+
+
+
+#|
+  (defvar w)
+  (defvar sem)
+  (setf w (make-instance 'window))
+  (setf sem (make-instance 'semaphore))
+  (move (scale sem 2 (make-instance 'point)) 200 300)
+  (set-shape w sem)
+  (current-phase sem)
+  (set-current-phase sem 2)
+  (set-semaphore-light sem)
+  (next-phase sem)
+  (set-semaphore-type sem :cycle)
+  (set-semaphore-type sem :arrow)
+
+
+
+
+|#
+
+
+
+
+(defclass crossroads (picture)
+  ((semaphores :initform '())
+   (phase-count :initform 0)
+   (crossroad-programe :initform '())
+   (crossroads-phase :initform 0)))
+
+
+(defmethod semaphores ((c crossroads))
+  (slot-value c 'semaphores))
+
+
+(defmethod set-semaphores ((c crossroads) value)
+  (setf (slot-value c 'semaphores) value)
+  c)
+
+
+(defmethod set-items ((c crossroads) value)
+  (call-next-method)
+  (set-semaphores c (remove-if (lambda (x) (not (classp x 'semaphore))) (items c)))
+  c)
+
+(defmethod phase-count ((c crossroads))
+  (slot-value c 'phase-count))
+
+(defmethod crossroad-programe ((c crossroads))
+  (slot-value c 'crossroad-programe))
+
+(defmethod set-crossroad-programe ((c crossroads) value)
+  (setf (slot-value c 'crossroad-programe) value)
+  (setf (slot-value c 'phase-count) (length value))
+  (set-crossroads-phase c 0)
+  (set-sem-lights c)
+  c)
+
+
+(defmethod current-crossroads-program ((c crossroads))
+  (car (nthcdr (crossroads-phase c) (crossroad-programe c))))
+
+(defmethod crossroads-phase ((c crossroads))
+  (slot-value c 'crossroads-phase))
+
+(defmethod set-crossroads-phase ((c crossroads) value)
+  (setf (slot-value c 'crossroads-phase) value)
+  (set-sem-lights c)
+  c)
+
+(defmethod next-phase ((c crossroads))
+  (if (= (phase-count c) (1+ (crossroads-phase c)))
+      (set-crossroads-phase c 0)
+    (set-crossroads-phase c (1+ (crossroads-phase c))))
+  c)
+
+
+(defmethod set-sem-lights ((c crossroads))
+  (mapcar (lambda (x y) (set-current-phase x y)) (semaphores c) 
+          (current-crossroads-program c))
+  c)
+
+
+
+
+
+
+#|
+  (defvar w)
+  (defvar c)
+  (setf w (make-instance 'window))
+  (set-size w 1000 1000)
+  (set-shape w (my-grid))
+  (setf c (make-instance 'crossroads))
+  (set-shape w c)
+  (set-items c (list (move (make-instance 'semaphore) 350 150) 
+                     (move (set-semaphore-type (make-instance 'semaphore) :arrow) 450 50) 
+                     (move (set-semaphore-type (make-instance 'semaphore) :cycle) 100 150)
+                     (move (set-semaphore-type (make-instance 'semaphore) :pedestrian) 200 100)))
+  (set-crossroad-programe c '((2 1 0 0) (3 1 1 0) (0 1 2 1) (1 0 3 0)))
+  (items c)
+  (next-phase c)
+|#
+
+
+(defmethod set-size ((w abstract-window) width height)
+  (mg-set-size (slot-value w 'mg-window) width height)
+  w)
+
+
+
+#|
+
+  (defvar w)
+  (setf w (make-instance 'window))
+  (set-size w *CROSS-ROAD-WH* *CROSS-ROAD-WH*)
+  (set-background w :green4)
+  (defvar envelopa )
+  (setf envelopa (make-my-crossroad))
+  (set-shape w envelopa)
+  ;; t = tři světa |  p = pedestrian | c = cyklic | 
+  ;; x = rovně a v pravo | w = warning | š = šipka | a = šipka v levo
+  (set-crossroad-programe envelopa 
+                           ;;t š     p c p c      p c p c  š     x w a   p p    x a w   x a w
+                          '((2 0     0 0 0 0      0 0 0 0  0     0 0 0   0 0    2 0 0   0 0 0)
+                            (2 0     0 0 0 0      0 0 0 0  0     0 0 0   0 0    3 0 0   0 0 0)
+                            (2 0     0 0 0 0      0 0 0 0  1     0 0 0   0 0    0 0 0   0 0 0)
+                            (3 1     0 0 0 0      0 0 0 0  0     0 0 0   0 0    0 0 0   0 0 0)                            
+                            (0 1     0 0 0 0      0 0 0 0  0     0 0 1   0 0    0 0 0   0 1 0)
+                            (0 1     0 0 0 0      0 0 0 0  0     0 0 2   0 0    0 0 0   0 2 0)
+                            (0 0     0 0 0 0      0 0 0 0  0     0 0 3   0 0    0 0 0   0 3 0)
+                            (0 0     0 1 0 1      0 0 0 0  0     1 0 0   0 0    0 0 0   1 0 0)
+                            (0 0     1 2 1 2      0 0 0 0  0     2 1 0   1 1    0 0 0   2 0 1)
+                            (0 0     0 3 0 3      0 0 0 0  0     2 1 0   0 0    0 0 0   2 0 1)
+                            (0 0     0 0 0 0      0 0 0 0  0     2 1 0   0 0    0 0 0   2 0 1)
+                            (0 0     0 0 0 0      0 0 0 0  0     3 0 0   0 0    0 0 0   3 0 0)
+                            (0 0     0 0 0 0      0 1 0 1  0     0 0 0   0 0    1 1 0   0 0 0)
+                            (0 0     0 0 0 0      1 2 1 2  0     0 0 0   0 0    2 2 1   0 0 0)
+                            (1 0     0 0 0 0      0 3 0 3  0     0 0 0   0 0    2 3 1   0 0 0)                          
+                            ))
+  (next-phase envelopa)
+
+  
+
+(defmethod set-size ((w abstract-window) width height)
+  (mg-set-size (slot-value w 'mg-window) width height))
+
+
+|#
+
+
+(defun make-my-crossroad ()
+  (let* ((wh *CROSS-ROAD-WH*)
+         (c (make-instance 'crossroads))
+         (items '((:vehicle 0 0.675 0.710)
+                  (:arrow 0 0.695 0.690)
+                  (:pedestrian 1.5708 0.695 0.810)
+                  (:cycle 1.5708 0.695 0.790)
+                  (:pedestrian -1.5708 0.300 0.810)
+                  (:cycle -1.5708 0.300 0.790)
+                  (:pedestrian 3.1416 0.210 0.700)
+                  (:cycle 3.1416 0.190 0.700)
+                  (:pedestrian 0 0.210 0.300)
+                  (:cycle 0 0.190 0.300)
+                  (:arrow 3.1416 0.340 0.340)
+                  (:top-right 1.5708 0.300 0.710)
+                  (:pedestrian-warning 1.5708 0.300 0.730)
+                  (:arrow-left 1.5708 0.300 0.690)
+                  (:pedestrian -1.5708 0.300 0.200)
+                  (:pedestrian 1.5708 0.700 0.200)
+                  (:top-right 3.1416 0.290 0.300)
+                  (:arrow-left 3.1416 0.310 0.300)
+                  (:pedestrian-warning 1.5708 0.270 0.300)
+                  (:top-right -1.5708 0.700 0.290)
+                  (:arrow-left -1.5708 0.700 0.310)
+                  (:pedestrian-warning 1.5708 0.700 0.270))))
+    (set-items c
+               (append 
+                (mapcar (lambda (x)
+                          (move (rotate (set-semaphore-type  (make-instance 'semaphore) (first x))
+                                        (second x) (make-instance 'point)) 
+                                (* wh (third x)) (* wh (fourth x))))
+                        items)
+                (list 
+                 (make-crosswalk :x (* wh 0.500) :y (* wh 0.750) )
+                 (make-crosswalk :x (* wh 0.500) :y (* wh 0.250) )
+                 (make-crosswalk :x (* wh 0.250) :y (* wh 0.500) :ro (/ pi 2))
+                 (set-color (set-filledp (make-my-quadrilateral (* wh 0.300) :b (* wh 2) :x (* wh 0.500)) t) :GREY38)
+                 (set-color (set-filledp (make-my-quadrilateral (* wh 2) :b (* wh 0.300) :y (* wh 0.500)) t) :GREY38))))))
+
+
+
+
+
+
+(defun make-crosswalk (&key (x 0) (y 0) (ro 0))
+  "Funkce vrací obrázek přechodu"
+  (let ((wh *CROSS-ROAD-WH*)
+        (m '(-0.125 -0.075 -0.025 0.025 0.075 0.125)))
+    (move (rotate (set-items (make-instance 'picture)
+                             (mapcar (lambda (x)
+                                       (set-color 
+                                        (set-filledp 
+                                         (make-my-quadrilateral (* wh 0.025) :b (* wh 0.100) :x (* wh x)) t) :white))
+                                     m)) 
+                  ro (make-instance 'point))
+          x y)))
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;;
+;;;pomocná funkce
+;;;
+
+(defun make-my-quadrilateral (a &key b (x 0) (y 0))
+  "funkce vrací čtyřhran podle zadané velikosti strany a a přípa"
+  (let ((b 
+         (or b a))
+        (znamenka 
+         '((-1 . -1) (1 . -1) (1 . 1) (-1 . 1))))
+    (move 
+     (set-items 
+      (make-instance 'polygon)
+      (mapcar 
+       (lambda (znamenka)
+         (move 
+          (make-instance 'point)
+          (* (car znamenka) (/ a 2))
+          (* (cdr znamenka) (/ b 2))))
+       znamenka))
+     x y)))
+
+
+(defun make-arrow-straitgh-right ()
+  (let ((r *light-radius*)
+        (img '((-0.25 . 0.6) (0.15 . 0.6) (0.15 . 0.2) (0.35 . 0.2) 
+               (0.35 . 0.4) (0.75 . 0.1) (0.35 . -0.2) (0.35 . 0) 
+               (0.15 . 0) (0.15 . -0.4) (0.35 . -0.4) (-0.05 . -0.8) 
+               (-0.45 . -0.4) (-0.25 . -0.4))))
+             (set-items (make-instance 'polygon)
+                 (mapcar (lambda (x) 
+                           (move (make-instance 'point) (* (car x) r) (* (cdr x) r)))
+                         img))))
+
+#|
+
+  (setf win (make-instance 'window))
+  (defvar c)
+  (setf c (set-semaphore-type (make-instance 'semaphore) :pedestrian-warning))
+  (set-shape win (move c   150 100))
+  (next-phase c)
+  (set-shape win (move (scale (make-arrow-straitgh-right) 10 (make-instance 'point)) 150 100))
+
+|#
+
+
+
+(defun make-arrow (&optional (direct :right))
+  "Funkce vrací polygon šipky s rozměry odvozenými z *light-radius*."
+  (let ((angle (cond ((eql direct :top) (* -1 (/ pi 2)))
+                     ((eql direct :left) pi)
+                     ((eql direct :down) (/ pi 2))
+                     (t 0)))
+        (r *light-radius*)
+        (img '((-0.6 . -0.4) (0.2 . -0.4) (0.2 . -0.7) (0.7 . 0)
+               (0.2 . 0.7) (0.2 . 0.4) (-0.6 . 0.4))))
+    (rotate (set-filledp
+      (set-items (make-instance 'polygon)
+                 (mapcar (lambda (x) 
+                           (move (make-instance 'point) (* (car x) r) (* (cdr x) r)))
+                         img))
+      nil) angle  (make-instance 'point))))
+
+
+(defun make-cycle ()
+  (let ((r *semaphore-width*)
+        (img '((-0.4 . -0.1) (-0.3 . -0.1) (-0.2 . 0.1)
+               (0.2 . 0.1) (0.2 . -0.3) (0.1 . -0.3)))
+        (wheel '((-0.2 . 0.1) (0.2 . 0.1))))
+    (set-items (make-instance 'picture)
+               (append (list (set-closedp (set-filledp
+                                           (set-items (make-instance 'polygon)
+                                                      (mapcar (lambda (x) 
+                                                                (move (make-instance 'point) (* (car x) r) (* (cdr x) r)))
+                                                              img))
+                                           nil) nil))
+                       (mapcar (lambda (x) 
+                                 (move (set-radius (make-instance 'circle) (* 0.1 r)) (* (car x) r) (* (cdr x) r) ))
+                               wheel)))))
+
+
+
+(defun make-straight-horizontal (len &key (move 0))
+  (make-my-quadrilateral (* 2 len) :b 0 :y move))
+
+(defun make-straight-vertical (len &key (move 0))
+  (make-my-quadrilateral 0 :b (* 2 len) :x move))
+
+(defun my-grid ()
+  (let ((grid '(1 2 3 4 5 6 7 8 9)))
+    (set-items (make-instance 'picture)
+               (append (mapcar (lambda (x) (make-straight-horizontal 1000 :move (* x 100)))
+                               grid)
+                       (mapcar (lambda (x) (make-straight-vertical 1000 :move (* x 100)))
+                               grid)))))
+
+
+
+
+#|
+
+  (defvar win)
+  (setf win (make-instance 'window))
+  (set-shape win (move (scale (make-arrow-straitgh-right) 3 (make-instance 'point)) 150 100))
+
+|#
