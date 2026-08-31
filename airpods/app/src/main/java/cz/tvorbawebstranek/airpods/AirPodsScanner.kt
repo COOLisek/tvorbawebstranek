@@ -26,6 +26,12 @@ import androidx.core.content.ContextCompat
  */
 class AirPodsScanner(
     private val context: Context,
+    /**
+     * Režim skenování. Na obrazovce chceme [ScanSettings.SCAN_MODE_LOW_LATENCY],
+     * protože uživatel čeká na čísla. Služba na pozadí použije
+     * [ScanSettings.SCAN_MODE_LOW_POWER], aby nevysávala baterii.
+     */
+    private val scanMode: Int = ScanSettings.SCAN_MODE_LOW_LATENCY,
     private val listener: (AirPodsStatus?) -> Unit
 ) {
 
@@ -68,19 +74,9 @@ class AirPodsScanner(
         }
     }
 
-    /**
-     * Vrátí oprávnění, která je potřeba si vyžádat na aktuální verzi Androidu.
-     */
-    fun requiredPermissions(): Array<String> =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            arrayOf(Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT)
-        } else {
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
+    fun requiredPermissions(): Array<String> = permissionsFor()
 
-    fun hasPermissions(): Boolean = requiredPermissions().all {
-        ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
-    }
+    fun hasPermissions(): Boolean = hasPermissions(context)
 
     fun isBluetoothEnabled(): Boolean = bluetoothAdapter?.isEnabled == true
 
@@ -123,7 +119,7 @@ class AirPodsScanner(
             .build()
 
         val settings = ScanSettings.Builder()
-            .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
+            .setScanMode(scanMode)
             .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
             .setReportDelay(0)
             .build()
@@ -175,16 +171,32 @@ class AirPodsScanner(
         handler.postDelayed(staleRunnable, STALE_MS)
     }
 
-    private companion object {
-        const val TAG = "AirPodsScanner"
+    companion object {
+        /**
+         * Oprávnění, která je potřeba si vyžádat na aktuální verzi Androidu.
+         * Do Androidu 11 vyžadovalo BLE skenování polohu, od Androidu 12 stačí
+         * BLUETOOTH_SCAN s příznakem neverForLocation.
+         */
+        fun permissionsFor(): Array<String> =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                arrayOf(Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT)
+            } else {
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+
+        fun hasPermissions(context: Context): Boolean = permissionsFor().all {
+            ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+        }
+
+        private const val TAG = "AirPodsScanner"
 
         /** Slabší signál než tohle je nejspíš cizí zařízení o pár místností dál. */
-        const val MIN_RSSI = -80
+        private const val MIN_RSSI = -80
 
         /** Okno, ve kterém vybíráme nejsilnější inzerát. */
-        const val WINDOW_MS = 1_000L
+        private const val WINDOW_MS = 1_000L
 
         /** Po jak dlouhém tichu považujeme údaje za neplatné. */
-        const val STALE_MS = 10_000L
+        private const val STALE_MS = 10_000L
     }
 }

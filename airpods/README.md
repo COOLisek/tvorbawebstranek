@@ -48,6 +48,10 @@ airpods/
     │   ├── AirPodsParser.kt        dekodér BLE paketu (čistá logika, bez Androidu)
     │   ├── AirPodsStatus.kt        datové třídy
     │   ├── AirPodsScanner.kt       BLE skenování, oprávnění, filtrování
+    │   ├── AirPodsService.kt       foreground service s oznámením
+    │   ├── BluetoothReceiver.kt    reakce na připojení a odpojení sluchátek
+    │   ├── BluetoothAudio.kt       dotazy na klasické Bluetooth spojení
+    │   ├── Prefs.kt                nastavení oznámení
     │   └── MainActivity.kt         obrazovka s bateriemi
     ├── main/res/                   layouty, barvy, texty, ikona
     └── test/java/…/airpods/
@@ -79,12 +83,45 @@ gradle wrapper            # jen poprvé, vyrobí ./gradlew
 APK je podepsané debug klíčem, takže se dá normálně nainstalovat do telefonu.
 Release varianta by byla nepodepsaná a nešla by nainstalovat.
 
+## Oznámení, dokud jsou sluchátka připojená
+
+Aby se aplikace chovala jako AndroPods nebo AirBattery – tedy aby stav baterie
+byl vidět pořád, ne jen když je aplikace otevřená – funguje to takhle:
+
+1. `BluetoothReceiver` je zapsaný v manifestu a poslouchá broadcasty
+   `ACL_CONNECTED` a `ACL_DISCONNECTED`. To jsou jedny z mála implicitních
+   broadcastů, které smí přijímat i receiver z manifestu, takže aplikace nemusí
+   kvůli tomu nic držet běžící.
+2. Při připojení sluchátek (rozhodujeme podle třídy zařízení, ne podle jména –
+   AirPods si jde přejmenovat) se spustí `AirPodsService`.
+3. Ta běží jako foreground service typu `connectedDevice`, skenuje v režimu
+   `SCAN_MODE_LOW_POWER` a stav baterie píše do trvalého oznámení.
+   Bez foreground service by Android BLE skenování na pozadí utnul.
+4. Při odpojení se služba zastaví a oznámení zmizí.
+
+Dvě věci, které to umožňují:
+
+- Bluetooth broadcast vyžadující `BLUETOOTH_CONNECT` je **výjimka z omezení
+  Androidu 12+** na start foreground service z pozadí. Bez téhle výjimky by
+  krok 2 skončil chybou.
+- Oznámení drží **poslední známé hodnoty** i když sluchátka zmlknou. Kdyby se
+  mazala, byla by po zavření pouzdra prázdná – místo toho je u nich napsané,
+  jak jsou stará.
+
+Pokud jsou sluchátka připojená už při otevření aplikace, broadcast dávno
+proběhl a nikdo ho nezachytil – `MainActivity` proto stav spojení zjistí sama
+přes profil A2DP a službu nastartuje.
+
+Přepínačem na obrazovce jde oznámení vypnout (ukládá se do SharedPreferences).
+
 ## Oprávnění
 
 | Android          | oprávnění                                          |
 |------------------|-----------------------------------------------------|
 | 12 (API 31) a víc | `BLUETOOTH_SCAN` (s `neverForLocation`), `BLUETOOTH_CONNECT` |
 | 11 (API 30) a míň | `BLUETOOTH`, `BLUETOOTH_ADMIN`, `ACCESS_FINE_LOCATION` |
+| 13 (API 33) a víc | `POST_NOTIFICATIONS` – bez něj oznámení nejde zobrazit |
+| 14 (API 34) a víc | `FOREGROUND_SERVICE_CONNECTED_DEVICE` |
 
 Do Androidu 11 vyžadoval systém k BLE skenování polohové oprávnění, protože se
 z okolních zařízení dá odvodit poloha. Od Androidu 12 už stačí `BLUETOOTH_SCAN`
@@ -92,15 +129,17 @@ s příznakem `neverForLocation`, takže aplikace o polohu vůbec nežádá.
 
 ## Omezení
 
-- **Sluchátka musí zrovna vysílat.** AirPods inzerát posílají jen chvíli po
-  otevření víka pouzdra nebo když jsou v uších. Zavřené pouzdro v kapse mlčí.
+- **Sluchátka musí zrovna vysílat.** AirPods inzerát posílají, když jsou
+  připojená a v uších, nebo chvíli po otevření víka pouzdra. Zavřené pouzdro
+  v kapse mlčí – oznámení pak drží poslední známé hodnoty a napíše, jak jsou
+  staré.
 - Apple používá **náhodné MAC adresy**, které se pravidelně mění, takže se
   konkrétní kus sluchátek nedá spolehlivě sledovat mezi jednotlivými pakety.
   Aplikace proto vždy ukáže ta nejbližší sluchátka podle síly signálu.
 - Inzeráty slabší než −80 dBm se ignorují, ať se neukazují cizí sluchátka
   o dvě místnosti dál. Konstanta `MIN_RSSI` v `AirPodsScanner.kt`.
-- Skenování běží jen když je aplikace na obrazovce – na pozadí by zbytečně
-  ubíralo baterii. Kdyby bylo potřeba trvalé sledování (widget, notifikace),
-  chtělo by to foreground service.
+- Když je aplikace otevřená a zároveň běží služba, skenuje se dvakrát
+  (obrazovka na plný výkon, služba v úsporném režimu). Androidu to nevadí,
+  limit je pět skenů na aplikaci, ale je to trochu plýtvání.
 - Rozpoznávání modelu vychází z veřejně zdokumentovaných ID; u modelu, který
   v tabulce chybí, aplikace zobrazí jeho ID a baterie i tak dekóduje správně.

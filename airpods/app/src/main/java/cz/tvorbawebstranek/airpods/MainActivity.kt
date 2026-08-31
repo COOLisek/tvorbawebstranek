@@ -1,10 +1,12 @@
 package cz.tvorbawebstranek.airpods
 
+import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.Build
 import android.os.SystemClock
 import android.view.View
 import android.widget.Toast
@@ -39,6 +41,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val notificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (!granted) {
+            Toast.makeText(this, R.string.notify_permission_needed, Toast.LENGTH_LONG).show()
+        }
+        startServiceIfConnected()
+    }
+
     private val enableBluetoothLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -69,6 +80,12 @@ class MainActivity : AppCompatActivity() {
             if (scanner.isScanning) stopScanning() else startScanning()
         }
 
+        binding.notifySwitch.isChecked = Prefs.isNotificationEnabled(this)
+        binding.notifySwitch.setOnCheckedChangeListener { _, enabled ->
+            Prefs.setNotificationEnabled(this, enabled)
+            if (enabled) askForNotificationPermission() else AirPodsService.stop(this)
+        }
+
         updateButton()
     }
 
@@ -77,6 +94,10 @@ class MainActivity : AppCompatActivity() {
         if (!scanner.isScanning && (firstStart || scanRequested)) startScanning()
         firstStart = false
         handler.post(ticker)
+
+        // Když jsou sluchátka připojená už teď, broadcast o připojení dávno proběhl
+        // a nikdo ho nezachytil – službu proto nastartujeme sami.
+        startServiceIfConnected()
     }
 
     override fun onStop() {
@@ -193,6 +214,31 @@ class MainActivity : AppCompatActivity() {
                 binding.statusText.setText(R.string.error_scan_failed)
                 Toast.makeText(this, R.string.error_scan_failed, Toast.LENGTH_LONG).show()
                 updateButton()
+            }
+        }
+    }
+
+    /**
+     * Od Androidu 13 je potřeba oprávnění, aby šlo oznámení vůbec zobrazit.
+     * Služba by běžela i bez něj, ale uživatel by z ní nic neviděl.
+     */
+    private fun askForNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        } else {
+            startServiceIfConnected()
+        }
+    }
+
+    private fun startServiceIfConnected() {
+        if (!Prefs.isNotificationEnabled(this)) return
+        BluetoothAudio.isAudioDeviceConnected(this) { connected ->
+            // Odpověď na dotaz na profil přijde asynchronně, obrazovka už mezitím
+            // nemusí existovat.
+            if (isFinishing || isDestroyed) return@isAudioDeviceConnected
+            if (connected) {
+                AirPodsService.start(this)
+                if (lastStatus == null) binding.statusText.setText(R.string.status_connected)
             }
         }
     }

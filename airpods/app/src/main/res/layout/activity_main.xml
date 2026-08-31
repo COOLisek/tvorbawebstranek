@@ -57,6 +57,15 @@
             android:layout_marginTop="16dp"
             android:text="@string/start_scan" />
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/notifySwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/notify_switch"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

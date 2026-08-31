@@ -22,5 +22,20 @@
     <string name="charging">Nabíjí se</string>
     <string name="in_ear">V uchu</string>
     <string name="not_available">Nedostupné (v pouzdře nebo vypnuté)</string>
-    <string name="hint">Jak to funguje: AirPods samy vysílají stav baterie v BLE inzerátu.\nAby ho bylo slyšet, měj sluchátka spárovaná a otevři víko pouzdra nebo si je dej do uší.\nPokud se nic neděje, zavři a znovu otevři pouzdro poblíž telefonu.</string>
+    <string name="hint">Jak to funguje: AirPods samy vysílají stav baterie v BLE inzerátu.\nJakmile se sluchátka připojí, aplikace začne stav držet v oznámení – nemusí být ani otevřená.\nPokud se nic neukazuje, otevři víko pouzdra poblíž telefonu nebo si sluchátka dej do uší.</string>
+
+    <!-- Oznámení a služba na pozadí -->
+    <string name="channel_name">Stav baterie</string>
+    <string name="channel_description">Oznámení s nabitím AirPods, dokud jsou připojené.</string>
+    <string name="notification_waiting_title">AirPods připojené</string>
+    <string name="notification_waiting_text">Zjišťuji stav baterie…</string>
+    <string name="notification_no_data">Baterie zatím není k dispozici</string>
+    <string name="notification_age">Údaje jsou %1$d min staré</string>
+    <string name="short_left">L</string>
+    <string name="short_right">P</string>
+    <string name="short_case">Pouzdro</string>
+    <string name="short_headphones">Baterie</string>
+    <string name="notify_switch">Držet baterii v oznámení, dokud jsou sluchátka připojená</string>
+    <string name="notify_permission_needed">Bez povolení oznámení se stav nezobrazí ve stavovém řádku.</string>
+    <string name="status_connected">Sluchátka jsou připojená · oznámení běží</string>
 </resources>
