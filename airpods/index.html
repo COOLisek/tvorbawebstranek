@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirPods Baterie – stažení</title>
+    <script src="https://kit.fontawesome.com/35134bda87.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg: #101014;
+            --card: #1c1c22;
+            --accent: #4cd964;
+            --text: #f2f2f7;
+            --muted: #9a9aa6;
+            --primary: #e94677;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            padding: 3em 1.2em;
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: 640px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 2em;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .back:hover {
+            color: var(--text);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.2em;
+        }
+
+        .perex {
+            color: var(--muted);
+            margin-bottom: 2em;
+        }
+
+        .download {
+            display: block;
+            text-align: center;
+            padding: 1em;
+            margin-bottom: 0.8em;
+            border-radius: 2em;
+            background-color: var(--accent);
+            color: #101014;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .download:hover {
+            opacity: 0.85;
+        }
+
+        .note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 2.5em;
+        }
+
+        .card {
+            background-color: var(--card);
+            border-radius: 16px;
+            padding: 1.4em 1.6em;
+            margin-bottom: 1.2em;
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            margin-bottom: 0.6em;
+        }
+
+        .card h2 i {
+            color: var(--accent);
+            margin-right: 0.4em;
+        }
+
+        ol,
+        ul {
+            padding-left: 1.3em;
+            color: var(--muted);
+        }
+
+        li {
+            margin-bottom: 0.35em;
+        }
+
+        strong {
+            color: var(--text);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-top: 2em;
+        }
+
+        footer a {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <a class="back" href="../index.html"><i class="fa-solid fa-arrow-left"></i> Zpět na vizitku</a>
+
+        <h1>AirPods Baterie</h1>
+        <p class="perex">
+            Aplikace pro Android, která přes Bluetooth Low Energy odposlechne stav baterie
+            AirPods – zvlášť levé sluchátko, pravé sluchátko i pouzdro.
+        </p>
+
+        <a class="download" href="AirPodsBaterie.apk" download>
+            <i class="fa-brands fa-android"></i> Stáhnout APK
+        </a>
+        <p class="note">Android 7.0 a novější · velikost cca 2 MB</p>
+
+        <div class="card">
+            <h2><i class="fa-solid fa-download"></i> Jak aplikaci nainstalovat</h2>
+            <ol>
+                <li>Stáhni si APK tlačítkem výše.</li>
+                <li>Android se zeptá, jestli povolíš instalaci z neznámého zdroje – povol to.</li>
+                <li>Po instalaci aplikaci spusť a potvrď oprávnění k Bluetooth.</li>
+            </ol>
+        </div>
+
+        <div class="card">
+            <h2><i class="fa-solid fa-headphones"></i> Jak ji používat</h2>
+            <ul>
+                <li>Měj AirPods spárované s telefonem a zapnutý Bluetooth.</li>
+                <li><strong>Otevři víko pouzdra</strong> vedle telefonu, nebo si sluchátka dej do uší –
+                    jen tehdy AirPods stav baterie vysílají.</li>
+                <li>Když se nic neukazuje, zavři a znovu otevři pouzdro blízko telefonu.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2><i class="fa-solid fa-circle-info"></i> Jak to funguje</h2>
+            <p style="color: var(--muted)">
+                AirPods nemají žádnou veřejnou Bluetooth službu, ze které by šla baterie přečíst.
+                Vysílají ale do okolí nešifrovanou část BLE inzerátu, ve které je stav baterie
+                schovaný. Aplikace se k ničemu nepřipojuje – jen tenhle broadcast pasivně
+                poslouchá a dekóduje ho.
+            </p>
+        </div>
+
+        <footer>
+            Zdrojový kód najdeš
+            <a href="https://github.com/COOLisek/tvorbawebstranek/tree/main/airpods">na GitHubu</a>.
+        </footer>
+
+    </div>
+</body>
+
+</html>
