@@ -1,0 +1,63 @@
+name: Build APK AirPods Baterie
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'airpods/**'
+      - '.github/workflows/airpods-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Stáhnout repozitář
+        uses: actions/checkout@v4
+
+      - name: Nastavit JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Nastavit Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: Testy dekodéru
+        working-directory: airpods
+        run: gradle test --no-daemon
+
+      - name: Sestavit APK
+        working-directory: airpods
+        run: gradle assembleDebug --no-daemon
+
+      - name: Přejmenovat APK
+        run: cp airpods/app/build/outputs/apk/debug/app-debug.apk AirPodsBaterie.apk
+
+      # APK si jde stáhnout i přímo z výsledku běhu (vyžaduje přihlášení na GitHub)
+      - name: Uložit APK k běhu
+        uses: actions/upload-artifact@v4
+        with:
+          name: AirPodsBaterie-apk
+          path: AirPodsBaterie.apk
+
+      # Release s pevným tagem, aby odkaz na webu byl pořád stejný a veřejný
+      - name: Publikovat release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view airpods-latest >/dev/null 2>&1; then
+            gh release upload airpods-latest AirPodsBaterie.apk --clobber
+          else
+            gh release create airpods-latest AirPodsBaterie.apk \
+              --title "AirPods Baterie – poslední build" \
+              --notes "APK se sestaví automaticky při každé změně ve složce airpods/."
+          fi

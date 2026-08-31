@@ -56,8 +56,15 @@ airpods/
 
 ## Build
 
-Otevři složku `airpods` v **Android Studiu** (Ladybug nebo novější) a dej Run.
-Studio si samo dotáhne Gradle i Android SDK.
+APK se sestavuje **automaticky na GitHub Actions** – workflow
+[`.github/workflows/airpods-apk.yml`](../.github/workflows/airpods-apk.yml)
+při každé změně ve složce `airpods/` na větvi `main` pustí testy, sestaví APK
+a nahraje ho do release s pevným tagem `airpods-latest`. Odkaz na stránce se
+stažením proto míří pořád na stejnou adresu a ukazuje vždy aktuální build.
+Workflow jde spustit i ručně (záložka Actions → Run workflow).
+
+Lokálně stačí otevřít složku `airpods` v **Android Studiu** (Ladybug nebo
+novější) a dát Run – Studio si samo dotáhne Gradle i Android SDK.
 
 Z příkazové řádky (potřebuješ nainstalované Android SDK a proměnnou
 `ANDROID_HOME`):
@@ -69,11 +76,8 @@ gradle wrapper            # jen poprvé, vyrobí ./gradlew
 ./gradlew assembleDebug   # APK v app/build/outputs/apk/debug/
 ```
 
-APK pro web pak stačí zkopírovat sem do složky:
-
-```bash
-cp app/build/outputs/apk/debug/app-debug.apk AirPodsBaterie.apk
-```
+APK je podepsané debug klíčem, takže se dá normálně nainstalovat do telefonu.
+Release varianta by byla nepodepsaná a nešla by nainstalovat.
 
 ## Oprávnění
 

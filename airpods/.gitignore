@@ -9,6 +9,3 @@ captures/
 .cxx/
 *.apk
 *.aab
-
-# APK pro stránku se stažením do gitu naopak patří
-!AirPodsBaterie.apk
