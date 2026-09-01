@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Je to bezlepkové? | Tomáš Křenek</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/35134bda87.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="wrap">
+        <a href="../index.html" class="back"><i class="fa-solid fa-arrow-left"></i> Zpět</a>
+
+        <h1>Je to bezlepkové?</h1>
+        <p class="lead">Naskenuj čárový kód produktu a zjisti, jestli obsahuje lepek. Data pochází z otevřené
+            databáze <a href="https://world.openfoodfacts.org/" target="_blank"
+                rel="noopener">Open&nbsp;Food&nbsp;Facts</a>.</p>
+
+        <div class="scanner-card">
+            <div id="reader"></div>
+            <div class="scanner-buttons">
+                <button id="start-btn" class="btn">
+                    <i class="fa-solid fa-camera"></i> Spustit skener
+                </button>
+                <button id="stop-btn" class="btn" hidden>
+                    <i class="fa-solid fa-stop"></i> Zastavit skener
+                </button>
+            </div>
+        </div>
+
+        <div class="manual-card">
+            <label for="manual-code">Nebo zadej čárový kód ručně</label>
+            <div class="manual-row">
+                <input id="manual-code" type="text" inputmode="numeric" placeholder="např. 8594001143135">
+                <button id="manual-btn" class="btn">Vyhledat</button>
+            </div>
+        </div>
+
+        <div id="result" class="result-card" hidden></div>
+
+        <p class="disclaimer">
+            <i class="fa-solid fa-circle-info"></i>
+            Výsledek je orientační a vychází z otevřené databáze, která nemusí mít úplná ani aktuální data.
+            Při alergii nebo celiakii se vždy spolehni na složení uvedené přímo na obalu.
+        </p>
+    </div>
+
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
